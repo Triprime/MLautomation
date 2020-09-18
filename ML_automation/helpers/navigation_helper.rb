@@ -2,9 +2,9 @@ def login
 	email 		= TestData.get_user_fixtures["fixture_1"]["email"]
 	password 	= TestData.get_user_fixtures["fixture_1"]["password"]
 
-	#@selenium.get("https://www.mavenlink.com/")
-	@selenium.get("https://app.mwho.mvn.link/")
-	click(:link_text, "Login")
+	#@selenium.get("https://www.mavenlink.com/login")
+	@selenium.get("https://app.mwho.mvn.link/login")
+	#click(:link_text, "Login")
 	click(:id, "login_email_address")
 	clear(:id, "login_email_address")
 	send_keys(:id, "login_email_address", email )

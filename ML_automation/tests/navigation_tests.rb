@@ -12,6 +12,7 @@ class NavigationTests < Test::Unit::TestCase
 
 	def setup
 		@selenium = Selenium::WebDriver.for(:firefox)
+		#@selenium = Selenium::WebDriver.for(:chrome)
 		login
 	end
 

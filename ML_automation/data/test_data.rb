@@ -4,7 +4,7 @@ class TestData
 
 	def self.get_base_url
 		#"https://app.mavenlink.com"
-		"https://app.mwho.mvn.link/"
+		"https://app.mwho.mvn.link"
 
 
 		# set with the following console command just before test run:
@@ -22,7 +22,7 @@ class TestData
 
 
 	def self.get_user_fixtures
-		fixture_file = File.join(File.dirname(__FILE__), 'user_fixtures.yaml')
+		fixture_file = File.join(File.dirname(__FILE__), 'user_fixtures.yml')
 		YAML.load_file(fixture_file)
 	end
 	
