@@ -48,3 +48,9 @@ def verify_page_url(nav_option)
 	fail_info = "Expected url should include: #{page_url}  \nFound url: #{current_url}"
 	assert_include(current_url, page_url, fail_info)
 end
+
+def verify_direct_url(url)
+	current_url = @selenium.current_url
+	fail_info = "Expected url should be: #{url}  \nFound url: #{current_url}"
+	assert_include(current_url, url, fail_info)
+end

@@ -1,5 +1,6 @@
 class PageData
-	@user_id = TestData.get_user_fixtures["fixture_1"]["id"]
+	# @user_id = TestData.get_user_fixtures["fixture_1"]["id"] 	# Account Admin
+	@user_id = TestData.get_user_fixtures["fixture_2"]["id"]	# Permissions QA account member
 
 
 	# Dashboard

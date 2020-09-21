@@ -75,6 +75,6 @@ def sub_navigation_to(nav_option)
 	click(sub_nav_locator_type, sub_nav_locator)
 end
 
-def direct_navigation_to(url)
+def navigate_by_url_to(url)
 	@selenium.get(url)
 end
