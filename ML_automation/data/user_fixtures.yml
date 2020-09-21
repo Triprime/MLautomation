@@ -2,4 +2,8 @@ fixture_1:
   id: 41275
   email: mavenlinkqa@gmail.com
   password: password
-  
+
+fixture_2:
+  id: 41485
+  email: mavenlinkqa+mwho.ag@gmail.com
+  password: password
