@@ -73,4 +73,8 @@ def sub_navigation_to(nav_option)
 	#wait_until_element_displayed(sub_nav_locator_type, sub_nav_locator)
 	hover(sub_nav_locator_type, sub_nav_locator)
 	click(sub_nav_locator_type, sub_nav_locator)
-	end
+end
+
+def direct_navigation_to(url)
+	
+end
