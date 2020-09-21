@@ -1,12 +1,12 @@
-require 'rubygems'
-require 'selenium-webdriver'
-require 'test/unit'
+# require 'rubygems'
+# require 'selenium-webdriver'
+# require 'test/unit'
 
-require_relative '../helpers/selenium_helper'
-require_relative '../helpers/navigation_helper'
+# require_relative '../helpers/selenium_helper'
+# require_relative '../helpers/navigation_helper'
 require_relative '../helpers/test_helper'
-require_relative '../data/test_data'
-require_relative '../data/page_data'
+# require_relative '../data/test_data'
+# require_relative '../data/page_data'
 
 class NavigationTests < Test::Unit::TestCase
 

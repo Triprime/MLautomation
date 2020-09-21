@@ -76,5 +76,5 @@ def sub_navigation_to(nav_option)
 end
 
 def direct_navigation_to(url)
-	
+	@selenium.get(url)
 end
