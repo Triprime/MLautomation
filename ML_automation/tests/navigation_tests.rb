@@ -6,11 +6,11 @@ class NavigationTests < Test::Unit::TestCase
 	def setup
 		@selenium = Selenium::WebDriver.for(:firefox)
 		#@selenium = Selenium::WebDriver.for(:chrome)
-		login
+		# login
 	end
 
 	def teardown
-		logout
+		# logout
 		@selenium.quit
 	end
 
@@ -18,6 +18,8 @@ class NavigationTests < Test::Unit::TestCase
 	# pass the page title text as a param
 
 	def test_main_navigation
+		login(1)
+
 		verify_page_url		("Your Dashboard")
 		verify_page_title	("Your Dashboard")
 
@@ -36,6 +38,7 @@ class NavigationTests < Test::Unit::TestCase
 		# main_navigation_to	("General Settings")
 		# verify_page_url		("General Settings")
 		# verify_page_title	("General Settings")
+		logout
 	end
 
 end

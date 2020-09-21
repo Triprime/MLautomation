@@ -7,6 +7,7 @@ require_relative '../helpers/navigation_helper'
 # require_relative '../helpers/test_helper'
 require_relative '../data/test_data'
 require_relative '../data/page_data'
+require_relative '../data/url_data'
 
 def verify_page_title(page_title)
 	element_text = find_element(:css, ".content-title").text

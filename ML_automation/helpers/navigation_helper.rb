@@ -1,6 +1,14 @@
-def login
-	email 		= TestData.get_user_fixtures["fixture_1"]["email"]
-	password 	= TestData.get_user_fixtures["fixture_1"]["password"]
+def login(user_num=1)
+	fixture = "fixture_#{user_num}"
+
+	# email 		= TestData.get_user_fixtures["fixture_1"]["email"]
+	# password 	= TestData.get_user_fixtures["fixture_1"]["password"]
+
+	# email 		= TestData.get_user_fixtures["fixture_2"]["email"]
+	# password 	= TestData.get_user_fixtures["fixture_2"]["password"]
+
+	email 		= TestData.get_user_fixtures[fixture]["email"]
+	password 	= TestData.get_user_fixtures[fixture]["password"]
 
 	#@selenium.get("https://www.mavenlink.com/login")
 	@selenium.get("https://app.mwho.mvn.link/login")
