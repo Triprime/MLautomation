@@ -6,11 +6,9 @@ class NavigationTests < Test::Unit::TestCase
 	def setup
 		@selenium = Selenium::WebDriver.for(:firefox)
 		#@selenium = Selenium::WebDriver.for(:chrome)
-		# login
 	end
 
 	def teardown
-		# logout
 		@selenium.quit
 	end
 

@@ -1,18 +1,12 @@
 def login(user_num=1)
-	fixture = "fixture_#{user_num}"
+	fixture_num = "fixture_#{user_num}"
+	email 		= TestData.get_user_fixtures[fixture_num]["email"]
+	password 	= TestData.get_user_fixtures[fixture_num]["password"]
+	login_url	= TestData.get_base_url+"/login"
 
-	# email 		= TestData.get_user_fixtures["fixture_1"]["email"]
-	# password 	= TestData.get_user_fixtures["fixture_1"]["password"]
+	puts("Login to #{login_url} with #{email}")
 
-	# email 		= TestData.get_user_fixtures["fixture_2"]["email"]
-	# password 	= TestData.get_user_fixtures["fixture_2"]["password"]
-
-	email 		= TestData.get_user_fixtures[fixture]["email"]
-	password 	= TestData.get_user_fixtures[fixture]["password"]
-
-	#@selenium.get("https://www.mavenlink.com/login")
-	@selenium.get("https://app.mwho.mvn.link/login")
-	#click(:link_text, "Login")
+	@selenium.get(login_url)
 	click(:id, "login_email_address")
 	clear(:id, "login_email_address")
 	send_keys(:id, "login_email_address", email )
@@ -23,6 +17,8 @@ def login(user_num=1)
 end
 
 def logout
+	puts("Logout")
+	
 	click(:css, ".user-settings-menu-toggle-name")
 	click(:link_text, "Sign Out")
 end

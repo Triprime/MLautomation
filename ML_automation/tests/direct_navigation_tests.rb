@@ -6,29 +6,29 @@ class NavigationTests < Test::Unit::TestCase
 	def setup
 		@selenium = Selenium::WebDriver.for(:firefox)
 		#@selenium = Selenium::WebDriver.for(:chrome)
-		# login
 	end
 
 	def teardown
-		# logout
 		@selenium.quit
 	end
 
 	# tests navigation by url for a set of urls expected for a specific permissions level
-
 	def test_direct_navigation
-		login(2)
+		user_fixture_num = 2
+		login(user_fixture_num)
 
 		last = 	UrlData.punch_clock.length
-		puts("Total urls: #{last}")
+		puts("Verify that user can reach #{last} urls")
 
 		i = 0
 		while i < last do
-			url = UrlData.punch_clock[i]
+			url_endpoint = UrlData.punch_clock[i]
+			base_url = TestData.get_base_url 
+			full_url = base_url+url_endpoint
 
-			puts("#{i+1}  Nav to  #{url}")
-			navigate_by_url_to		(url)
-			verify_direct_url		(url)
+			puts("#{i+1}  Nav to  #{full_url}")
+			navigate_by_url_to		(full_url)
+			verify_direct_url		(full_url)
 			#verify_page_title		(title) #should this be required for this test?
 			i+=1
 		end
