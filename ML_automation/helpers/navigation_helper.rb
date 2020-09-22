@@ -4,7 +4,7 @@ def login(user_num=1)
 	password 	= TestData.get_user_fixtures[fixture_num]["password"]
 	login_url	= TestData.get_base_url+"/login"
 
-	puts("Login to #{login_url} with #{email}")
+	puts("User:  #{email}\nLogin: #{login_url}")
 
 	@selenium.get(login_url)
 	click(:id, "login_email_address")
@@ -18,7 +18,7 @@ end
 
 def logout
 	puts("Logout")
-	
+
 	click(:css, ".user-settings-menu-toggle-name")
 	click(:link_text, "Sign Out")
 end
@@ -79,6 +79,7 @@ def sub_navigation_to(nav_option)
 	click(sub_nav_locator_type, sub_nav_locator)
 end
 
+# might be more appropriate to move this to selenium_helper.rb
 def navigate_by_url_to(url)
 	@selenium.get(url)
 end

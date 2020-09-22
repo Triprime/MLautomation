@@ -6,7 +6,7 @@ require_relative '../helpers/selenium_helper'
 require_relative '../helpers/navigation_helper'
 # require_relative '../helpers/test_helper'
 require_relative '../data/test_data'
-require_relative '../data/page_data'
+# require_relative '../data/page_data' # not required for direct_navigation_tests.rb
 require_relative '../data/url_data'
 
 def verify_page_title(page_title)
@@ -27,7 +27,6 @@ def verify_page_url(nav_option)
 	if nav_option === "Files"
 		page_url = PageData.files[:page_url]
 	end
-
 
 	if nav_option === "Projects"
 		page_url = PageData.projects[:page_url]
@@ -54,4 +53,8 @@ def verify_direct_url(url)
 	current_url = @selenium.current_url
 	fail_info = "Expected url should be: #{url}  \nFound url: #{current_url}"
 	assert_include(current_url, url, fail_info)
+
+	if current_url == url
+		puts("   PASS    - Found url")
+	end
 end
