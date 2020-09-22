@@ -3,17 +3,17 @@ class UrlData
 	def self.punch_clock_temp(user_id=2,workspace_id=2)
 		[
 			# Small sample for quick testing
-			"/users/#{user_id}/dashboard?tab=your-dashboard",	# DASHBOARD
+			"/users/#{user_id}/dashboard?tab=your-dashboard",	# DASHBOARD > Your Dashboard
 			"/workspaces/#{workspace_id}/files",				# PROJECTS > Select Project > Files
-			"/time_entries"	
+			"/time_entries"										# TIME & EXPENSE > Time Entries (requires membership in a project)
 		]
 	end
 
-	def self.punch_clock(user_id,workspace_id)
+	def self.punch_clock(user_id=2,workspace_id=2)
 		[
 			# DASHBOARD
 			"/users/#{user_id}/dashboard?tab=your-dashboard",	# Your Dashboard
-			"/users/#{user_id}/show_activity_feed",			# Activity Feed
+			"/users/#{user_id}/show_activity_feed",				# Activity Feed
 			"/files",											# Files
 
 			# PROJECTS
