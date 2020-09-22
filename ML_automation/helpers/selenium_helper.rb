@@ -18,3 +18,7 @@ def hover(type=:css, element)
 	target = find_element(type, element)
 	@selenium.action.move_to(target).perform
 end
+
+def navigate_by_url_to(url)
+	@selenium.get(url)
+end

@@ -3,8 +3,8 @@ require 'selenium-webdriver'
 require 'test/unit'
 
 require_relative '../helpers/selenium_helper'
-require_relative '../helpers/navigation_helper'
-# require_relative '../helpers/test_helper'
+# require_relative '../helpers/navigation_helper' # not required for direct_navigation_tests.rb
+require_relative '../helpers/login_out_helper'
 require_relative '../data/test_data'
 # require_relative '../data/page_data' # not required for direct_navigation_tests.rb
 require_relative '../data/url_data'
