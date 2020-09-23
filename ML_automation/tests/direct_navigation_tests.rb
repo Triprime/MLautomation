@@ -31,8 +31,10 @@ class NavigationTests < Test::Unit::TestCase
 			base_url 		= TestData.get_base_url 
 			full_url 		= base_url+url_endpoint
 
-			puts("#{i+1}  Attempt - #{full_url}")
+			puts("#{i+1}  GET   - #{full_url}")
 			navigate_by_url_to(full_url)
+			check_for_502
+			check_for_404
 			verify_direct_url(full_url)
 			#verify_page_title		(title) # should this check be required for this test?
 			i+=1

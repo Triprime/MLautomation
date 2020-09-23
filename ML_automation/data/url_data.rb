@@ -2,7 +2,7 @@ class UrlData
 
 	def self.punch_clock_temp(user_id=2,workspace_id=2)
 		[
-			# Small sample for quick testing
+			# Small sample of urls for quick testing during development
 			"/users/#{user_id}/dashboard?tab=your-dashboard",	# DASHBOARD > Your Dashboard
 			"/workspaces/#{workspace_id}/files",				# PROJECTS > Select Project > Files
 			"/time_entries"										# TIME & EXPENSE > Time Entries (requires membership in a project)
@@ -20,7 +20,7 @@ class UrlData
 			"/projects#?genreFilter=has_participation", 		# Project List > Index
 			"/users/#{user_id}/show_project_details",			# Project List > Cards
 			"/gantt",											# Project List > Gantt
-			"/workspace_groups",								# > Groups
+			"/workspace_groups",								# Project List > Groups
 			"/workspaces/#{workspace_id}",						# > Project > Activity (default view)
 			"/workspaces/#{workspace_id}/tracker/position", 	# > Project > Task Tracker
 			"/workspaces/#{workspace_id}/gantt",				# > Project > Gantt

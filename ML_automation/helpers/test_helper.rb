@@ -55,6 +55,19 @@ def verify_direct_url(url)
 	assert_include(current_url, url, fail_info)
 
 	if current_url == url
-		puts("   PASS    - Found url")
+		puts("   PASS  - Found url")
+	end
+end
+
+def check_for_404
+	if @selenium.find_elements(:xpath, "//*[text()='404 Error']").size > 0
+		puts("   404 Error")
+	end
+end
+
+def check_for_502
+	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
+		puts("   502 Error.  Refreshing...")
+		@selenium.get(@selenium.current_url)
 	end
 end

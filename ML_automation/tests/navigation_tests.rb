@@ -16,7 +16,7 @@ class NavigationTests < Test::Unit::TestCase
 	# pass the page title text as a param
 
 	def test_main_navigation
-		login(1)
+		login_with_fixture(1)
 
 		verify_page_url		("Your Dashboard")
 		verify_page_title	("Your Dashboard")
