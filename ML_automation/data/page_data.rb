@@ -91,21 +91,52 @@ class PageData
 
 	def self.unique_elements(user_id=0, workspace_id=0)
 		[
-			# DASHBOARD > Your Dashboard
+		# DASHBOARD 
+			# Your Dashboard
 			["/users/#{user_id}/dashboard?tab=your-dashboard",
 				:css,".dashboard-tab"],
+			# Activity Feed	
+			["/users/#{user_id}/show_activity_feed",				
+				:css,".events"],
+			# Files
+			["/files",											
+				:id,"files_wrapper"],
 
-			# PROJECTS > Select Project > Files
+		# PROJECTS
+			# Project List > Index (default view)
+			["/projects#?genreFilter=has_participation",
+				:css,".workspace-list-wrapper"],
+			# Project List > Cards 		
+			["/users/#{user_id}/show_project_details",
+				:id,"next_two_weeks_wrapper"],
+			# Project List > Gantt			
+			["/gantt",
+				:css,".toggle-fullscreen-button"],
+			# Project List > Groups											
+			["/workspace_groups",
+				:css,".workspace-groups-list-table-region"],
+			# > Project > Activity (default view)								
+			["/workspaces/#{workspace_id}",
+				:css,".main-post-form-container"],
+			# > Project > Task Tracker						
+			["/workspaces/#{workspace_id}/tracker/position",
+				:css,".tracker"],
+			# > Project > Gantt 	
+			["/workspaces/#{workspace_id}/gantt",				
+				:css,".toggle-fullscreen-button"],
+			# Select Project > Files
 			["/workspaces/#{workspace_id}/files",
 				:css,".files > div"],		
 
-			# TIME & EXPENSE > Time Entries (requires membership in a project)	
-			["/time_entries",
-				:css,".time-entry-history"],
-
-			# TASKS > Your View
+		# TASKS
+			# Your View
 			["/stories/upcoming?usingDefaultFilters=true&columnSet=Your+View&byStatus=not+started",
-				:xpath, "//*[text()='Your View']"]								
+				:xpath, "//*[text()='Your View']"],
+
+		# TIME & EXPENSE 
+			# Time Entries (requires membership in a project)	
+			["/time_entries",
+				:css,".time-entry-history"]
 		
 		]
 

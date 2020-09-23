@@ -24,18 +24,18 @@ class NavigationTests < Test::Unit::TestCase
 
 
 		# get and output total number of urls to check for this test
-		# total_urls = 	UrlData.punch_clock().length		# full list for url testing
-		total_urls 		= UrlData.punch_clock_temp().length	# short list for quick url testing
+		total_urls = 	UrlData.punch_clock().length		# full list for url testing
+		# total_urls 		= UrlData.punch_clock_temp().length	# short list for quick url testing
 		permission	 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission_level"]	
-		puts("Verify that user can reach #{total_urls} expected urls for permission level: #{permission}")
+		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}")
 
 
 		#loop through array containing all urls for this test
 		i = 0
 		while i < total_urls do
 			# build url from base and endpoint
-			# url_endpoint	= UrlData.punch_clock(@user_id,@workspace_id)[i]		# full list for url testing
-			url_endpoint	= UrlData.punch_clock_temp(@user_id,@workspace_id)[i] 	# short list for quick url testing
+			url_endpoint	= UrlData.punch_clock(@user_id,@workspace_id)[i]		# full list for url testing
+			# url_endpoint	= UrlData.punch_clock_temp(@user_id,@workspace_id)[i] 	# short list for quick url testing
 			base_url 		= TestData.get_base_url 
 			full_url 		= base_url+url_endpoint
 
