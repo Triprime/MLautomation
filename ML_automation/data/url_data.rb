@@ -5,7 +5,8 @@ class UrlData
 			# Small sample of urls for quick testing during development
 			"/users/#{user_id}/dashboard?tab=your-dashboard",	# DASHBOARD > Your Dashboard
 			"/workspaces/#{workspace_id}/files",				# PROJECTS > Select Project > Files
-			"/time_entries"										# TIME & EXPENSE > Time Entries (requires membership in a project)
+			"/time_entries" 									# TIME & EXPENSE > Time Entries (requires membership in a project)
+			
 		]
 	end
 

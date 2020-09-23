@@ -1,6 +1,6 @@
 class PageData
 	# @user_id = TestData.get_user_fixtures["fixture_1"]["user_id"] 	# Account Admin
-	@user_id = TestData.get_user_fixtures["fixture_2"]["user_id"]	# Permissions QA account member
+	# @user_id = TestData.get_user_fixtures["fixture_2"]["user_id"]	# Permissions QA account member
 
 
 	# Dashboard
@@ -87,6 +87,28 @@ class PageData
 			:sub_nav_locator		=>	"",
 			:sub_nav_locator_type	=>	:css
 		}
+	end
+
+	def self.unique_elements(user_id=0, workspace_id=0)
+		[
+			# DASHBOARD > Your Dashboard
+			["/users/#{user_id}/dashboard?tab=your-dashboard",
+				:css,".dashboard-tab"],
+
+			# PROJECTS > Select Project > Files
+			["/workspaces/#{workspace_id}/files",
+				:css,".files > div"],		
+
+			# TIME & EXPENSE > Time Entries (requires membership in a project)	
+			["/time_entries",
+				:css,".time-entry-history"],
+
+			# TASKS > Your View
+			["/stories/upcoming?usingDefaultFilters=true&columnSet=Your+View&byStatus=not+started",
+				:xpath, "//*[text()='Your View']"]								
+		
+		]
+
 	end
 
 

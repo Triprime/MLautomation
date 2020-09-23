@@ -6,7 +6,7 @@ require_relative '../helpers/selenium_helper'
 # require_relative '../helpers/navigation_helper' # not required for direct_navigation_tests.rb
 require_relative '../helpers/login_out_helper'
 require_relative '../data/test_data'
-# require_relative '../data/page_data' # not required for direct_navigation_tests.rb
+require_relative '../data/page_data' # not required for direct_navigation_tests.rb
 require_relative '../data/url_data'
 
 def verify_page_title(page_title)
@@ -54,9 +54,10 @@ def verify_direct_url(url)
 	fail_info = "Expected url should be: #{url}  \nFound url: #{current_url}"
 	assert_include(current_url, url, fail_info)
 
-	if current_url == url
-		puts("   PASS  - Found url")
-	end
+	# uncomment to help identify malformed urls
+	# if current_url == url
+	# 	puts("   PASS  - Found url")
+	# end
 end
 
 def check_for_404
@@ -69,5 +70,30 @@ def check_for_502
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
 		puts("   502 Error.  Refreshing...")
 		@selenium.get(@selenium.current_url)
+	end
+end
+
+def verify_page_by_unique_element(user_id, workspace_id)
+	current_url = @selenium.current_url
+
+	total_urls = PageData.unique_elements(user_id,workspace_id).length
+
+	i = 0
+	while i < total_urls
+		url_endpoint	= PageData.unique_elements(user_id,workspace_id)[i][0]
+		base_url 		= TestData.get_base_url 
+		full_url 		= base_url+url_endpoint
+
+		if current_url == full_url
+			locator_type = PageData.unique_elements(user_id,workspace_id)[i][1]
+			locator 	 = PageData.unique_elements(user_id,workspace_id)[i][2]
+
+			if @selenium.find_elements(locator_type,locator).size > 0
+				puts("   PASS  - Found unique_element (#{locator_type} #{locator})")
+			else
+				puts("	 Could NOT find unique element")
+			end
+		end
+		i+=1
 	end
 end
