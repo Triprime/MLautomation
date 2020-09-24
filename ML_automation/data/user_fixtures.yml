@@ -1,4 +1,5 @@
 fixture_1:
+  environment: mwho
   user_id: 41275
   email: mavenlinkqa@gmail.com
   password: password
@@ -6,6 +7,7 @@ fixture_1:
   permission_level: account_admin
 
 fixture_2:
+  environment: mwho
   user_id: 41485
   email: mavenlinkqa+mwho.ag@gmail.com
   password: password

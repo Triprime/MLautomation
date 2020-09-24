@@ -24,8 +24,7 @@ class NavigationTests < Test::Unit::TestCase
 
 
 		# get and output total number of urls to check for this test
-		total_urls = 	UrlData.punch_clock().length		# full list for url testing
-		# total_urls 		= UrlData.punch_clock_temp().length	# short list for quick url testing
+		total_urls 		= UrlData.punch_clock().length		# full list for url testing
 		permission	 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission_level"]	
 		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}")
 
@@ -35,7 +34,6 @@ class NavigationTests < Test::Unit::TestCase
 		while i < total_urls do
 			# build url from base and endpoint
 			url_endpoint	= UrlData.punch_clock(@user_id,@workspace_id)[i]		# full list for url testing
-			# url_endpoint	= UrlData.punch_clock_temp(@user_id,@workspace_id)[i] 	# short list for quick url testing
 			base_url 		= TestData.get_base_url 
 			full_url 		= base_url+url_endpoint
 
@@ -44,19 +42,20 @@ class NavigationTests < Test::Unit::TestCase
 			puts("#{i+1}  GET   - #{full_url}")
 			navigate_by_url_to(full_url)
 			verify_direct_url(full_url)
-			
+			sleep 1
 
 			# check for usual errors (these do not automatically cause the test to fail)
 			check_for_502		# refreshes automatically
-			if !check_for_404	# continue checks if no 404 encountered
-				# puts("   No 404")
-
-				# check for unique comination of elements (title and specific element)
-				#verify_page_title		(title) 	
-				verify_page_by_unique_element(@user_id,@workspace_id)
-			else
-				puts("   Continue to check next url")
+			check_for_privileges
+			if check_for_404	
+				# if 404, skip check for unique elements and move to next url
+				puts("   Continue to check next url") 
 				# Maybe count and output an array of urls that resulted in a 404, when test finishes
+			# else
+			# 	# if no 404, continue to check for unique elements 
+			# 	# check for unique comination of elements (title and specific element)
+			# 	#verify_page_title		(title) 	
+			# 	verify_page_by_unique_element(@user_id,@workspace_id)
 			end
 
 			i+=1

@@ -62,14 +62,23 @@ end
 
 def check_for_404
 	if @selenium.find_elements(:xpath, "//*[text()='404 Error']").size > 0
-		puts("   404 Error")
+		puts("    404 ERROR")
+	# else
+	# 	puts("   No 404")
 	end
 end
 
 def check_for_502
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
-		puts("   502 Error.  Refreshing...")
+		puts("    502 ERROR.  Refreshing...")
 		@selenium.get(@selenium.current_url)
+	end
+end
+
+# You don't have account privileges
+def check_for_privileges
+	if @selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0
+		puts("    NO PRIVILEGES")
 	end
 end
 
@@ -84,14 +93,14 @@ def verify_page_by_unique_element(user_id, workspace_id)
 		base_url 		= TestData.get_base_url 
 		full_url 		= base_url+url_endpoint
 
-		if current_url == full_url
+		if current_url.include?(full_url)
 			locator_type = PageData.unique_elements(user_id,workspace_id)[i][1]
 			locator 	 = PageData.unique_elements(user_id,workspace_id)[i][2]
 
 			if @selenium.find_elements(locator_type,locator).size > 0
-				puts("   PASS  - Found unique_element (#{locator_type} #{locator})")
+				puts("    Found (#{locator_type} #{locator})")
 			else
-				puts("	 Could NOT find unique element")
+				puts("	 NOT Found (#{locator_type} #{locator}).\n	 Continuing...")
 			end
 		end
 		i+=1

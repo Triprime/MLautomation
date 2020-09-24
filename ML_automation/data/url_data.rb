@@ -41,12 +41,20 @@ class UrlData
 			"/expenses#overview",								# (requires time entry in project)
 			"/expenses#submissions",							# (requires time entry in project)
 
+			# This should return a NO PRIVILEGES - for demonstration purposes only
+			"/invoices",
+
+			# This should return a 404 Error - for demonstration purposes only
+			"/invoicess",
+
 			# TOP NAV: User Name Menu
 			"/profiles/#{user_id}",
 			"/settings/email",
 			"/settings/password",
 			"/settings/google_apps",
 			"/settings/export"
+
+
 		]
 	end
 
