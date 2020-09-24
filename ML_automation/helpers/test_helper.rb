@@ -33,6 +33,28 @@ def check_for_privileges(full_url)
 	end
 end
 
+def output_errors
+	puts("\nTotal 404 ERRORS: #{@errors_404.length}")
+	@errors_404.each do |url|
+		puts("   #{url}\n")
+	end
+
+	puts("\nTotal PERMISSION ERRORS: #{@errors_permission.length}")
+	@errors_permission.each do |url|
+		puts("   #{url}\n")
+	end
+end
+
+def build_url(i)
+	url_endpoint	= UrlData.punch_clock(@user_id,@workspace_id)[i]		# full list for url testing
+	base_url 		= TestData.get_base_url
+	return base_url+url_endpoint 
+end
+
+def output_url(i,url)
+	puts("#{i+1}  GET   - #{url}")
+end
+
 # def verify_page_title(page_title)
 # 	element_text = find_element(:css, ".content-title").text
 # 	fail_info = "Expected text: #{page_title}  \nFound text: #{element_text}"

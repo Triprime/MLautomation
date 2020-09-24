@@ -28,21 +28,17 @@ class NavigationTests < Test::Unit::TestCase
 		permission	 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission_level"]	
 		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
 
+
+		# create arrays to hold error info
 		@errors_404				= Array.new
 		@errors_permission		= Array.new
 
-		#loop through array containing all urls for this test
+		# loop through array containing all urls for this test
 		i = 0
 		while i < total_urls do
-			# build url from base and endpoint
-			url_endpoint	= UrlData.punch_clock(@user_id,@workspace_id)[i]		# full list for url testing
-			base_url 		= TestData.get_base_url 
-			full_url 		= base_url+url_endpoint
-
-
-			# output url to check and go directly to that page via GET
-			puts("#{i+1}  GET   - #{full_url}")
-			navigate_by_url_to(full_url)
+			full_url = build_url(i)
+			output_url(i,full_url)
+			get_url(full_url)
 			# verify_direct_url(full_url)
 			sleep 1
 
@@ -54,16 +50,7 @@ class NavigationTests < Test::Unit::TestCase
 			i+=1
 		end
 
-		puts("\nTotal 404 ERRORS: #{@errors_404.length}")
-		@errors_404.each do |url|
-			puts("   #{url}\n")
-		end
-
-		puts("Total PERMISSION ERRORS: #{@errors_permission.length}")
-		@errors_permission.each do |url|
-			puts("   #{url}\n")
-		end
-
+		output_errors
 		logout
 	end
 
