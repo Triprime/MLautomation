@@ -278,6 +278,69 @@ class PageData
 				:url  			=>	"/time_entries",
 				:locator_type 	=>	:css,
 				:locator 		=> 	".time-entry-history"
+			},
+			{   
+				:id 			=> 	18,
+				:description	=>	"TIME & EXPENSE  > Monthly (requires membership in a project)", 
+				:url  			=>	"/time_entries?tab=monthly",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	19,
+				:description	=>	"TIME & EXPENSE  > Schedule: Weekly (requires membership in a project)", 
+				:url  			=>	"/time_entries?tab=schedule",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	20,
+				:description	=>	"TIME & EXPENSE  > Expenses (requires membership in a project)", 
+				:url  			=>	"/expenses#overview",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	21,
+				:description	=>	"TIME & EXPENSE  > Expense Reports (requires membership in a project)", 
+				:url  			=>	"/expenses#submissions",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	22,
+				:description	=>	"TOP NAV: User Name Menu > Profile", 
+				:url  			=>	"/profiles/#{user_id}",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	23,
+				:description	=>	"TOP NAV: User Name Menu > Email Settings", 
+				:url  			=>	"/settings/email",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	24,
+				:description	=>	"TOP NAV: User Name Menu > Password & Authorizations", 
+				:url  			=>	"/settings/password",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	25,
+				:description	=>	"TOP NAV: User Name Menu > Google Apps", 
+				:url  			=>	"/settings/google_apps",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
+			},
+			{   
+				:id 			=> 	26,
+				:description	=>	"TOP NAV: User Name Menu > Your Exports", 
+				:url  			=>	"/settings/export",
+				:locator_type 	=>	:none,
+				:locator 		=> 	""
 			}
 		]	
 

@@ -17,7 +17,7 @@ def login_with_fixture(num)
 end
 
 def logout
-	puts("Logout")
+	puts("\nLogout")
 
 	click(:css, ".user-settings-menu-toggle-name")
 	click(:link_text, "Sign Out")

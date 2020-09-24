@@ -26,8 +26,10 @@ class NavigationTests < Test::Unit::TestCase
 		# get and output total number of urls to check for this test
 		total_urls 		= UrlData.punch_clock().length		# full list for url testing
 		permission	 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission_level"]	
-		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}")
+		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
 
+		@errors_404				= Array.new
+		@errors_permission		= Array.new
 
 		#loop through array containing all urls for this test
 		i = 0
@@ -38,27 +40,28 @@ class NavigationTests < Test::Unit::TestCase
 			full_url 		= base_url+url_endpoint
 
 
-			# output url to check and directly go to that page via GET
+			# output url to check and go directly to that page via GET
 			puts("#{i+1}  GET   - #{full_url}")
 			navigate_by_url_to(full_url)
-			verify_direct_url(full_url)
+			# verify_direct_url(full_url)
 			sleep 1
 
-			# check for usual errors (these do not automatically cause the test to fail)
+			# check for errors (these do not automatically cause the test to fail)
 			check_for_502		# refreshes automatically
-			check_for_privileges
-			if check_for_404	
-				# if 404, skip check for unique elements and move to next url
-				puts("   Continue to check next url") 
-				# Maybe count and output an array of urls that resulted in a 404, when test finishes
-			# else
-			# 	# if no 404, continue to check for unique elements 
-			# 	# check for unique comination of elements (title and specific element)
-			# 	#verify_page_title		(title) 	
-			# 	verify_page_by_unique_element(@user_id,@workspace_id)
-			end
-
+			check_for_404(full_url)	
+			check_for_privileges(full_url)
+			
 			i+=1
+		end
+
+		puts("\nTotal 404 ERRORS: #{@errors_404.length}")
+		@errors_404.each do |url|
+			puts("   #{url}\n")
+		end
+
+		puts("Total PERMISSION ERRORS: #{@errors_permission.length}")
+		@errors_permission.each do |url|
+			puts("   #{url}\n")
 		end
 
 		logout
