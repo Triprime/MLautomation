@@ -17,39 +17,21 @@ class NavigationTests < Test::Unit::TestCase
 		user_fixture_num = 2
 		login_with_fixture(user_fixture_num)
 
-
 		# get user_id and workspace_id for ensuring correct url formation
 		@user_id 		= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["user_id"]
 		@workspace_id 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["workspace_id"]
-
 
 		# get and output total number of urls to check for this test
 		total_urls 		= UrlData.punch_clock().length		# full list for url testing
 		permission	 	= TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission_level"]	
 		puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
 
-
 		# create arrays to hold error info
 		@errors_404				= Array.new
 		@errors_permission		= Array.new
 
 		# loop through array containing all urls for this test
-		i = 0
-		while i < total_urls do
-			full_url = build_url(i)
-			output_url(i,full_url)
-			get_url(full_url)
-			# verify_direct_url(full_url)
-			sleep 1
-
-			# check for errors (these do not automatically cause the test to fail)
-			check_for_502		# refreshes automatically
-			check_for_404(full_url)	
-			check_for_privileges(full_url)
-			
-			i+=1
-		end
-
+		test_array_of_urls(total_urls)
 		output_errors
 		logout
 	end

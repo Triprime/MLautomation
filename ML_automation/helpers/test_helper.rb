@@ -13,6 +13,7 @@ def check_for_502
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
 		puts("    502 ERROR.  Refreshing...")
 		@selenium.get(@selenium.current_url)
+		sleep 1
 	end
 end
 
@@ -53,6 +54,24 @@ end
 
 def output_url(i,url)
 	puts("#{i+1}  GET   - #{url}")
+end
+
+def	test_array_of_urls(total_urls)
+	i = 0
+	while i < total_urls do
+		full_url = build_url(i)
+		output_url(i,full_url)
+		get_url(full_url)
+		# verify_direct_url(full_url)
+		sleep 1
+
+		# check for errors (these do not automatically cause the test to fail)
+		check_for_502		# refreshes automatically
+		check_for_404(full_url)	
+		check_for_privileges(full_url)
+		
+		i+=1
+	end
 end
 
 # def verify_page_title(page_title)
