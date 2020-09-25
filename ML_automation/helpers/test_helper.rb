@@ -74,6 +74,24 @@ def	test_array_of_urls(total_urls)
 	end
 end
 
+def get_user_id_from_fixture(user_fixture_num)
+	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["user_id"]
+end
+
+def get_workspace_id_from_fixture(user_fixture_num)
+	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["workspace_id"]
+end
+
+def count_urls_for_permission #(permission)
+	return UrlData.punch_clock().length	
+	# this only counts the "punch_clock" specific urls
+	# use new data object PageData.permissions_data to lookup permission passed in param
+end
+
+def output_intro(total_urls,permission)
+	puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
+end
+
 # def verify_page_title(page_title)
 # 	element_text = find_element(:css, ".content-title").text
 # 	fail_info = "Expected text: #{page_title}  \nFound text: #{element_text}"
