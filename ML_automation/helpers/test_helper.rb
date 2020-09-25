@@ -56,17 +56,16 @@ def output_url(i,url)
 	puts("#{i+1}  GET   - #{url}")
 end
 
-def	test_array_of_urls(total_urls)
+def	test_urls(total_urls)
 	i = 0
 	while i < total_urls do
 		full_url = build_url(i)
 		output_url(i,full_url)
-		get_url(full_url)
+		get_url(full_url)	# includes 502 check and auto refresh
 		# verify_direct_url(full_url)
 		sleep 1
 
 		# check for errors (these do not automatically cause the test to fail)
-		check_for_502		# refreshes automatically
 		check_for_404(full_url)	
 		check_for_privileges(full_url)
 		
@@ -82,10 +81,10 @@ def get_workspace_id_from_fixture(user_fixture_num)
 	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["workspace_id"]
 end
 
-def count_urls_for_permission #(permission)
+def count_urls_for_permission #(group)
 	return UrlData.punch_clock().length	
 	# this only counts the "punch_clock" specific urls
-	# use new data object PageData.permissions_data to lookup permission passed in param
+	# instead, need to use new data object AGData.access_groups to lookup group passed in by param
 end
 
 def output_intro(total_urls,permission)

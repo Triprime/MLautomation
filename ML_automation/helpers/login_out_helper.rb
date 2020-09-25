@@ -1,4 +1,4 @@
-def login_with_fixture(num)
+def login_using_fixture(num)
 	fixture_num = "fixture_#{num}"
 	email 		= TestData.get_user_fixtures[fixture_num]["email"]
 	password 	= TestData.get_user_fixtures[fixture_num]["password"]
@@ -6,7 +6,7 @@ def login_with_fixture(num)
 
 	puts("User:  #{email}\nLogin: #{login_url}")
 
-	@selenium.get(login_url)
+	get_url(login_url)
 	click(:id, "login_email_address")
 	clear(:id, "login_email_address")
 	send_keys(:id, "login_email_address", email )

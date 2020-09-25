@@ -20,7 +20,7 @@ class NavigationTests < Test::Unit::TestCase
 		# select user fixture with matching permission 
 		user_fixture_num = 2 # create method to find user fixture num for fixture with matching permission
 		# login with that user
-		login_with_fixture(user_fixture_num)
+		login_using_fixture(user_fixture_num)
 
 		# get user_id and workspace_id to ensure correct url formation
 		@user_id 		= get_user_id_from_fixture(user_fixture_num)
@@ -35,7 +35,7 @@ class NavigationTests < Test::Unit::TestCase
 		@errors_permission		= Array.new
 
 		# loop through array containing all urls appropriate to this test
-		test_array_of_urls(total_urls)
+		test_urls(total_urls)
 		output_errors
 		logout
 	end

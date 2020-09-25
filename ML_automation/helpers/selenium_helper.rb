@@ -21,4 +21,5 @@ end
 
 def get_url(url)
 	@selenium.get(url)
+	check_for_502
 end
