@@ -26,8 +26,8 @@ class NavigationTests < Test::Unit::TestCase
 	# 	end
 	# end
 
-	def test_ag_data_array
-		puts("\narray test")
+	def test_ag_data_array_access
+		puts("\nurl array test")
 
 		urls_array = AGData.ag_urls_array
 		puts("url_groups count: #{urls_array.count}")
@@ -40,9 +40,30 @@ class NavigationTests < Test::Unit::TestCase
 			puts("urls_count:  #{urls.count}")
 
 			urls.each do |url|
-				puts("\n   url_id:   #{url[:url_id]}")
-				puts("   url_desc: #{url[:description]}") 
-				puts("   url:      #{url[:url]}")  
+				puts("\n   id:   #{url[:url_id]}")
+				puts("   desc: #{url[:description]}") 
+				puts("   url:  #{url[:url]}")  
+			end
+		end
+	end
+
+	def test_user_data_array_access
+		puts("\n\nuser array test")
+
+		user_array = UserData.users
+		puts("environment count: #{user_array.count}")
+
+		user_array.each do |environment|
+			puts("\nenvironment:  #{environment[:environment]}")
+
+			users = environment[:users]
+			puts("users_count:  #{users.count}")
+
+			users.each do |user|
+				puts("\n   user_id:    #{user[:user_id]}")
+				puts("   email:      #{user[:email]}")
+				puts("   permission: #{user[:permission]}")
+				 
 			end
 		end
 	end

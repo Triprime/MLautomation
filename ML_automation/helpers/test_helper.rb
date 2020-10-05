@@ -9,6 +9,7 @@ require_relative '../data/test_data'
 require_relative '../data/page_data' # not required for direct_navigation_tests.rb
 require_relative '../data/url_data'
 require_relative '../data/ag_data'
+require_relative '../data/user_data'
 
 def check_for_502
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
@@ -53,6 +54,11 @@ def build_url(i)
 	return base_url+url_endpoint 
 end
 
+def build_url(url_endpoint)
+	base_url 		= TestData.get_base_url
+	return base_url+url_endpoint 
+end
+
 def output_url(i,url)
 	puts("#{i+1}  GET   - #{url}")
 end
@@ -74,6 +80,29 @@ def	test_urls(total_urls)
 	end
 end
 
+def test_urls_for_permission(permission)
+	urls_array = AGData.ag_urls_array(@user_id,@workspace_id)
+	urls_array.each do |url_group|
+		if url_group[:group_name] == permission
+			urls = url_group[:urls]
+
+			i = 0
+			urls.each do |url_data|
+				full_url = build_url(url_data[:url])
+				output_url(i,full_url)
+				
+				get_url(full_url)
+				sleep 1
+
+				# check for errors (these do not automatically cause the test to fail)
+				check_for_404(full_url)	
+				check_for_privileges(full_url)
+				i+=1
+			end
+		end
+	end
+end
+
 def get_fixture_user_id(user_fixture_num)
 	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["user_id"]
 end
@@ -92,23 +121,60 @@ def count_urls_for_permission #(group)
 	# instead, need to use new data object AGData.access_groups to lookup group passed in by param
 end
 
+def count_urls_for_permission(permission)
+	urls_array = AGData.ag_urls_array
+	urls_array.each do |url_group|
+		if url_group[:group_name] == permission
+			# puts("\ngroup_name:  #{url_group[:group_name]}")
+			# puts("group_id:    #{url_group[:group_id]}")
+
+			urls = url_group[:urls]
+			# puts("urls to test for #{permission} permission:  #{urls.count}")
+			return urls.count
+		end
+	end
+end
+
 def output_intro(total_urls,permission)
 	puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
 end
 
-# def find_user_for_permission(permission)
-# 	#count_fixtures
-# 	total_fixtures # = some way to count fixtures
+def find_user_for_permission(location,permission)
+	# puts("\nfinding #{location} user for #{permission} permission...")
 
-# 	i = 1
-# 	while i < total_fixtures
-# 		puts("permission: #{get_fixture_permission(i)}")
-# 	i+=1
-# 	end
+	user_array = UserData.users
+	user_array.each do |index|
+		if index[:environment] == location
+			# puts("\nenvironment:  #{index[:environment]}")
 
-# 	#search fixtures
+			users = index[:users]
+			users.each do |user|
+				if user[:permission] == permission
+					# puts("   found user")
+					# puts("   user_id:    #{user[:user_id]}")
+					# puts("   email:      #{user[:email]}")
+					return user[:user_id]
+					break  
+				end
+			end		
+		end
+	end
+end
 
-# end
+def get_user_workspace_id(location,id)
+	user_array = UserData.users
+	user_array.each do |index|
+		if index[:environment] == location
+			users = index[:users]
+			users.each do |user|
+				if user[:user_id] == id
+					return user[:workspace_id]
+					break  
+				end
+			end
+		end
+	end
+end
 
 # def verify_page_title(page_title)
 # 	element_text = find_element(:css, ".content-title").text
