@@ -4,7 +4,6 @@ class NavigationTests < Test::Unit::TestCase
 
 	def setup
 		@selenium = Selenium::WebDriver.for(:firefox)
-		#@selenium = Selenium::WebDriver.for(:chrome)
 	end
 
 	def teardown
@@ -12,7 +11,7 @@ class NavigationTests < Test::Unit::TestCase
 	end
 
 	# for a specific user/permission level, tests to reach a set of expected urls
-	def test_punchclock_urls_v2
+	def test_punchclock_urls
 		# set permission level and environment for test	
 		@location 		= "mwho"
 		@permission 	= "punch_clock"

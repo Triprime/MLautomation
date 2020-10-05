@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'selenium-webdriver'
 require 'test/unit'
+require 'colorize'
 
 require_relative '../helpers/selenium_helper'
 require_relative '../helpers/login_out_helper'
@@ -9,8 +10,9 @@ require_relative '../data/ag_data'
 require_relative '../data/user_data'
 
 def check_for_502
+	# TODO - implement retry loop instead of potential infinite loop
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
-		puts("    502 ERROR.  Refreshing...")
+		puts("    502 ERROR.  Refreshing...".yellow)
 		@selenium.get(@selenium.current_url)
 		sleep 1
 		check_for_502
@@ -19,40 +21,40 @@ end
 
 def check_for_404(full_url)
 	if @selenium.find_elements(:xpath, "//*[text()='404 Error']").size > 0
-		puts("    404 ERROR")
+		puts("    404 ERROR".red)
 		@errors_404 << full_url
 	# else
 	# 	puts("   No 404")
 	end
 end
 
-# You don't have account privileges
 def check_for_privileges(full_url)
 	if @selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0
-		puts("    NO PRIVILEGES")
+		puts("    NO PRIVILEGES".red)
 		@errors_permission << full_url
 	end
 end
 
 def output_errors
-	puts("\n404 ERRORS Total: #{@errors_404.length}")
+	puts("\n404 ERRORS Total: #{@errors_404.length}".red)
 	@errors_404.each do |url|
 		puts("   #{url}\n")
 	end
 
-	puts("\nPERMISSION ERRORS Total: #{@errors_permission.length}")
+	puts("\nPERMISSION ERRORS Total: #{@errors_permission.length}".red)
 	@errors_permission.each do |url|
 		puts("   #{url}\n")
 	end
 end
 
 def build_url(url_endpoint)
-	base_url 		= TestData.get_base_url
+	base_url = TestData.get_base_url
 	return base_url+url_endpoint 
 end
 
 def output_url(i,url)
-	puts("#{i+1}  GET   - #{url}")
+	# puts("#{i+1}  GET   - #{url}")
+	puts("     GET   - #{url}".green)
 end
 
 def test_urls_for_permission(permission)
@@ -64,8 +66,10 @@ def test_urls_for_permission(permission)
 			i = 0
 			urls.each do |url_data|
 				full_url = build_url(url_data[:url])
-				output_url(i,full_url)
 				
+				puts("#{i+1}  #{url_data[:description]}")
+				output_url(i,full_url)
+
 				get_url(full_url)
 				sleep 1
 
@@ -98,9 +102,9 @@ end
 
 def find_user_for_permission(location,permission)
 	user_array = UserData.users
-	user_array.each do |index|
-		if index[:environment] == location
-			users = index[:users]
+	user_array.each do |env_group|
+		if env_group[:environment] == location
+			users = env_group[:users]
 			users.each do |user|
 				if user[:permission] == permission
 					return user[:user_id]
@@ -113,9 +117,9 @@ end
 
 def get_user_workspace_id(location,id)
 	user_array = UserData.users
-	user_array.each do |index|
-		if index[:environment] == location
-			users = index[:users]
+	user_array.each do |env_group|
+		if env_group[:environment] == location
+			users = env_group[:users]
 			users.each do |user|
 				if user[:user_id] == id
 					return user[:workspace_id]
