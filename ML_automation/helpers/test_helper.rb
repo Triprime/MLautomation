@@ -8,6 +8,7 @@ require_relative '../helpers/login_out_helper'
 require_relative '../data/test_data'
 require_relative '../data/page_data' # not required for direct_navigation_tests.rb
 require_relative '../data/url_data'
+require_relative '../data/ag_data'
 
 def check_for_502
 	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
@@ -35,12 +36,12 @@ def check_for_privileges(full_url)
 end
 
 def output_errors
-	puts("\nTotal 404 ERRORS: #{@errors_404.length}")
+	puts("\n404 ERRORS Total: #{@errors_404.length}")
 	@errors_404.each do |url|
 		puts("   #{url}\n")
 	end
 
-	puts("\nTotal PERMISSION ERRORS: #{@errors_permission.length}")
+	puts("\nPERMISSION ERRORS Total: #{@errors_permission.length}")
 	@errors_permission.each do |url|
 		puts("   #{url}\n")
 	end
@@ -73,12 +74,16 @@ def	test_urls(total_urls)
 	end
 end
 
-def get_user_id_from_fixture(user_fixture_num)
+def get_fixture_user_id(user_fixture_num)
 	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["user_id"]
 end
 
-def get_workspace_id_from_fixture(user_fixture_num)
+def get_fixture_workspace_id(user_fixture_num)
 	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["workspace_id"]
+end
+
+def get_fixture_permission(user_fixture_num)
+	return TestData.get_user_fixtures["fixture_#{user_fixture_num}"]["permission"]
 end
 
 def count_urls_for_permission #(group)
@@ -90,6 +95,20 @@ end
 def output_intro(total_urls,permission)
 	puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
 end
+
+# def find_user_for_permission(permission)
+# 	#count_fixtures
+# 	total_fixtures # = some way to count fixtures
+
+# 	i = 1
+# 	while i < total_fixtures
+# 		puts("permission: #{get_fixture_permission(i)}")
+# 	i+=1
+# 	end
+
+# 	#search fixtures
+
+# end
 
 # def verify_page_title(page_title)
 # 	element_text = find_element(:css, ".content-title").text

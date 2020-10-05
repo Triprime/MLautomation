@@ -4,7 +4,7 @@ fixture_1:
   email: mavenlinkqa@gmail.com
   password: password
   workspace_id: 69515
-  permission_level: account_admin
+  permission: account_admin
 
 fixture_2:
   environment: mwho
@@ -12,4 +12,4 @@ fixture_2:
   email: mavenlinkqa+mwho.ag@gmail.com
   password: password
   workspace_id: 69515
-  permission_level: punch_clock
+  permission: punch_clock
