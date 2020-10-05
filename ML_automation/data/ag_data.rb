@@ -1,31 +1,5 @@
 class AGData
 
-	# def self.ag_urls(user_id=0, workspace_id=0)
-	# # [
-	# 	{
-	# 		:group_name		=> "punch_clock",
-	# 		:group_id		=> 1,
-	# 		:urls 			=>
-	# 		[ 
-	# 			{   
-	# 				:url_id 		=> 	1,
-	# 				:description	=>	"DASHBOARD > Your Dashboard", 
-	# 				:url  			=>	"/users/#{user_id}/dashboard?tab=your-dashboard",
-	# 				:locator_type 	=>	:css,
-	# 				:locator 		=> 	".dashboard-tab"
-	# 			},
-	# 			{
-	# 				:url_id			=>	2
-	# 			}
-	# 		]
-	# 	}
-	# # 	,
-	# # 	{
-	# # 		:group_name		=> "collaborate",
-	# # 	}
-	# # ]
-	# end
-
 	def self.ag_urls_array(user_id=0, workspace_id=0)
 	[
 		{
