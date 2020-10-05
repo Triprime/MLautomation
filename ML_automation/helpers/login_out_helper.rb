@@ -3,7 +3,7 @@ def login_with_user(location,id)
 	password 	= get_user_password(location,id)
 	login_url	= TestData.get_base_url+"/login"
 
-	puts("User:  #{email}\nLogin: #{login_url}")
+	puts("\nUser:  #{email}\nLogin: #{login_url}")
 
 	get_url(login_url)
 	click(:id, "login_email_address")

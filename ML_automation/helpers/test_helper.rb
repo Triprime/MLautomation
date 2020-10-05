@@ -36,12 +36,12 @@ def check_for_privileges(full_url)
 end
 
 def output_errors
-	puts("\n404 ERRORS Total: #{@errors_404.length}".red)
+	puts("\n404 Errors total: #{@errors_404.length}".red)
 	@errors_404.each do |url|
 		puts("   #{url}\n")
 	end
 
-	puts("\nPERMISSION ERRORS Total: #{@errors_permission.length}".red)
+	puts("PERMISSION Errors total: #{@errors_permission.length}".red)
 	@errors_permission.each do |url|
 		puts("   #{url}\n")
 	end
@@ -54,7 +54,7 @@ end
 
 def output_url(i,url)
 	# puts("#{i+1}  GET   - #{url}")
-	puts("     GET   - #{url}".green)
+	puts("#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}  GET - #{url}".green)
 end
 
 def test_urls_for_permission(permission)
@@ -71,7 +71,7 @@ def test_urls_for_permission(permission)
 				output_url(i,full_url)
 
 				get_url(full_url)
-				sleep 1
+				sleep 0.3
 
 				# check for errors (these do not automatically cause the test to fail)
 				check_for_404(full_url)	
@@ -97,7 +97,7 @@ def count_urls_for_permission(permission)
 end
 
 def output_intro(total_urls,permission)
-	puts("\nVerify that user can reach #{total_urls} expected urls for permission level: #{permission}\n\n")
+	puts("\nVerify that user can reach #{total_urls.to_s.yellow.bold} expected urls for permission: #{permission.yellow.bold}")
 end
 
 def find_user_for_permission(location,permission)
