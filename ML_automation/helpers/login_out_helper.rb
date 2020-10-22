@@ -18,6 +18,11 @@ end
 def logout
 	puts("\nLogout")
 
+	# go to dashboard
+	dashboard_url = TestData.get_base_url+"/users/#{@user_id}/dashboard"
+	get_url(dashboard_url)
+	sleep 0.3
+
 	click(:css, ".user-settings-menu-toggle-name")
 	click(:link_text, "Sign Out")
 end

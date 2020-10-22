@@ -23,8 +23,9 @@ def check_for_404(full_url)
 	if @selenium.find_elements(:xpath, "//*[text()='404 Error']").size > 0
 		puts("    404 ERROR".red)
 		@errors_404 << full_url
-	# else
-	# 	puts("   No 404")
+		return true
+	else
+		return false
 	end
 end
 
@@ -32,16 +33,31 @@ def check_for_privileges(full_url)
 	if @selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0
 		puts("    NO PRIVILEGES".red)
 		@errors_permission << full_url
+		return true
+	else
+		return false
 	end
 end
 
+def output_url_results(full_url)
+	# check for errors (these do not automatically cause the test to fail)
+	error = false
+	if check_for_404(full_url) == true || check_for_privileges(full_url) == true
+		error = true
+	else
+		error = false
+	end
+
+	output_url(full_url,error)
+end
+
 def output_errors
-	puts("\n404 Errors total: #{@errors_404.length}".red)
+	puts("\nError counts\n   #{@errors_404.length}: 404 Error".red)
 	@errors_404.each do |url|
 		puts("   #{url}\n")
 	end
 
-	puts("PERMISSION Errors total: #{@errors_permission.length}".red)
+	puts("   #{@errors_permission.length}: Permission denied".red)
 	@errors_permission.each do |url|
 		puts("   #{url}\n")
 	end
@@ -52,9 +68,12 @@ def build_url(url_endpoint)
 	return base_url+url_endpoint 
 end
 
-def output_url(i,url)
-	# puts("#{i+1}  GET   - #{url}")
-	puts("#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}  GET - #{url}".green)
+def output_url(url,error)
+	if error == true
+		puts("    #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} GET #{url}".red)
+	else
+		puts("    #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} GET #{url}".green)
+	end
 end
 
 def test_urls_for_permission(permission)
@@ -68,14 +87,10 @@ def test_urls_for_permission(permission)
 				full_url = build_url(url_data[:url])
 				
 				puts("#{i+1}  #{url_data[:description]}")
-				output_url(i,full_url)
-
 				get_url(full_url)
 				sleep 0.3
+				output_url_results(full_url)
 
-				# check for errors (these do not automatically cause the test to fail)
-				check_for_404(full_url)	
-				check_for_privileges(full_url)
 				i+=1
 			end
 		end

@@ -22,7 +22,7 @@ class NavigationTests < Test::Unit::TestCase
 
 		login_with_user(@location,@user_id)
 		
-		# get and output total number of urls to check for this test
+		# get and output total number of urls to check during this test
 		total_urls 		= count_urls_for_permission(@permission)		
 		output_intro(total_urls,@permission)	
 
