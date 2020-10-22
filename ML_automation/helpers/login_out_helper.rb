@@ -1,7 +1,7 @@
 def login_with_user(location,id)
 	email 		= get_user_email(location,id)
 	password 	= get_user_password(location,id)
-	login_url	= TestData.get_base_url+"/login"
+	login_url	= EnvironmentData.get_base_url+"/login"
 
 	puts("\nUser:  #{email}\nLogin: #{login_url}")
 
@@ -19,7 +19,7 @@ def logout
 	puts("\nLogout")
 
 	# go to dashboard
-	dashboard_url = TestData.get_base_url+"/users/#{@user_id}/dashboard"
+	dashboard_url = EnvironmentData.get_base_url+"/users/#{@user_id}/dashboard"
 	get_url(dashboard_url)
 	sleep 0.3
 

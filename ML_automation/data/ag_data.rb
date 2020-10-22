@@ -4,7 +4,6 @@ class AGData
 	[
 		{
 			:group_name		=> "punch_clock",
-			# :group_id		=> 1,
 			# :default_group 	=> true,
 			# :view_only		=> false,
 			# :participant 	=> "contributor",
@@ -166,12 +165,12 @@ class AGData
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				},
-				{   
-					:description	=>	"BILLING > Invoices (should not have permission)", 
-					:url  			=>	"/invoices"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
+				# {   
+				# 	:description	=>	"BILLING > Invoices (should not have permission)", 
+				# 	:url  			=>	"/invoices"
+				# 	# :locator_type 	=>	:none,
+				# 	# :locator 		=> 	""
+				# },
 				{   
 					:description	=>	"BILLING > Invoices (should 404 - incorrect url)", 
 					:url  			=>	"/invoicess"
@@ -182,7 +181,6 @@ class AGData
 		},
 		{
 			:group_name		=> "collaborate",
-			:group_id		=> 2,
 			:urls 			=>
 			[ 
 				{   

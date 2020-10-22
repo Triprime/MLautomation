@@ -13,7 +13,8 @@ class NavigationTests < Test::Unit::TestCase
 	# for a specific user/permission level, tests to reach a set of expected urls
 	def test_punchclock_urls
 		# set permission level and environment for test	
-		@location 		= "mwho"
+		@location 		= ENV['environment']
+		# @location 		= "mwho"
 		@permission 	= "punch_clock"
 
 		#get info for user appropriate to permissions type

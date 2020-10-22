@@ -5,7 +5,7 @@ require 'colorize'
 
 require_relative '../helpers/selenium_helper'
 require_relative '../helpers/login_out_helper'
-require_relative '../data/test_data'
+require_relative '../data/env_data'
 require_relative '../data/ag_data'
 require_relative '../data/user_data'
 
@@ -40,40 +40,60 @@ def check_for_privileges(full_url)
 end
 
 def output_url_results(full_url)
-	# check for errors (these do not automatically cause the test to fail)
+	# check for errors (an error does not automatically cause the test to fail)
 	error = false
 	if check_for_404(full_url) == true || check_for_privileges(full_url) == true
 		error = true
-	else
-		error = false
 	end
 
 	output_url(full_url,error)
 end
 
 def output_errors
-	puts("\nError counts\n   #{@errors_404.length}: 404 Error".red)
-	@errors_404.each do |url|
-		puts("   #{url}\n")
+	puts("\nError counts")
+
+	error_count_404 = ""
+	error_count_permission = ""
+
+	if @errors_404.length > 0
+		error_count_404 = "#{@errors_404.length}".red
+	else
+		error_count_404 = "#{@errors_404.length}".green
 	end
 
-	puts("   #{@errors_permission.length}: Permission denied".red)
+	if @errors_permission.length > 0
+		error_count_permission = "#{@errors_permission.length}".red
+	else
+		error_count_permission = "#{@errors_permission.length}".green
+	end
+
+	# puts(" #{@errors_404.length}: 404 Error".red)
+	puts(" #{error_count_404} - 404 Error")
+	@errors_404.each do |url|
+		puts("    #{url}\n")
+	end
+
+	# puts(" #{@errors_permission.length}: Permission denied".red)
+	puts(" #{error_count_permission} - Permission denied")
 	@errors_permission.each do |url|
-		puts("   #{url}\n")
+		puts("    #{url}\n")
 	end
 end
 
 def build_url(url_endpoint)
-	base_url = TestData.get_base_url
+	base_url = EnvironmentData.get_base_url
 	return base_url+url_endpoint 
 end
 
 def output_url(url,error)
 	if error == true
-		puts("    #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} GET #{url}".red)
+		url_result = "GET #{url}".red
 	else
-		puts("    #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} GET #{url}".green)
+		url_result = "GET #{url}".green
 	end
+
+	# puts("    #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} #{url_result}")
+	puts("    #{url_result}")
 end
 
 def test_urls_for_permission(permission)
@@ -101,12 +121,7 @@ def count_urls_for_permission(permission)
 	urls_array = AGData.ag_urls_array
 	urls_array.each do |url_group|
 		if url_group[:group_name] == permission
-			# puts("\ngroup_name:  #{url_group[:group_name]}")
-			# puts("group_id:    #{url_group[:group_id]}")
-
-			urls = url_group[:urls]
-			# puts("urls to test for #{permission} permission:  #{urls.count}")
-			return urls.count
+			return url_group[:urls].count
 		end
 	end
 end
@@ -123,7 +138,9 @@ def find_user_for_permission(location,permission)
 			users.each do |user|
 				if user[:permission] == permission
 					return user[:user_id]
-					break  
+					break
+				# else
+				# 	puts("No user_id found for permission: #{permission} and environment: #{location}")  
 				end
 			end		
 		end
@@ -138,7 +155,9 @@ def get_user_workspace_id(location,id)
 			users.each do |user|
 				if user[:user_id] == id
 					return user[:workspace_id]
-					break  
+					break
+				# else
+				# 	puts("No workspace_id found for user_id: #{id} and environment: #{location}")    
 				end
 			end
 		end
