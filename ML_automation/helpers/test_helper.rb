@@ -1,13 +1,3 @@
-require 'rubygems'
-require 'selenium-webdriver'
-require 'test/unit'
-require 'colorize'
-
-require_relative '../helpers/selenium_helper'
-require_relative '../helpers/login_out_helper'
-require_relative '../data/env_data'
-require_relative '../data/ag_data'
-require_relative '../data/user_data'
 
 def check_for_502
 	# TODO - implement retry loop instead of potential infinite loop

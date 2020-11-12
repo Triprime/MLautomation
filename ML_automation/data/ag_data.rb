@@ -180,11 +180,25 @@ class AGData
 			]
 		},
 		{
-			:group_name		=> "collaborate",
+			:group_name		=> "collaborator",
 			:urls 			=>
-			[ 
+			[
+				{
+					:description	=>	"PROJECTS > All Projects > Project | Time & Expenses", 
+					:url  			=>	"/workspaces/#{workspace_id}/?tab=time-tracking"
+				}
+			]
+		},
+		{ # this is a template for how to set up urls for a specific access group 
+			:group_name		=> "access group name goes here",
+			:urls 			=>
+			[
 				{   
-					:description	=>	"description goes here", 
+					:description	=>	"description goes here - describe how a user would nav to this url", 
+					:url  			=>	"url goes here"
+				},
+				{   
+					:description	=>	"MAIN NAV > Sub-nav > View | Tab", 
 					:url  			=>	"url goes here"
 				}
 			]

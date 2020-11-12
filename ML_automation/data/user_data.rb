@@ -5,20 +5,6 @@ class UserData
 		{
 			:environment 	=> "mwho",
 			:users			=> [
-				# {
-				# 	:user_id 		=> 41275,
-				# 	:email 			=> "mavenlinkqa@gmail.com",
-				# 	:password 		=> "password",
-				# 	:workspace_id 	=> 69515,
-				# 	:permission 	=> "account_admin"
-				# },
-				# {
-				# 	:user_id 		=> 41485,
-				# 	:email 			=> "mavenlinkqa+mwho.ag@gmail.com",
-				# 	:password 		=> "password",
-				# 	:workspace_id 	=> 69515,
-				# 	:permission 	=> "punch_clock"	
-				# },
 				{
 					:user_id 		=> 41545,
 					:email 			=> "mavenlinkqa+automation@gmail.com",
@@ -32,6 +18,13 @@ class UserData
 					:password 		=> "password",
 					:workspace_id 	=> 69665,
 					:permission 	=> "punch_clock"	
+				},
+				{
+					:user_id 		=> 41585,
+					:email 			=> "mavenlinkqa+auto.co@gmail.com",
+					:password 		=> "password",
+					:workspace_id 	=> 69665,
+					:permission 	=> "collaborator"	
 				}
 			]
 		},
@@ -39,11 +32,12 @@ class UserData
 			:environment 	=> "production",
 			:users			=> [
 				{
+					# this is an example/template
 					:user_id 		=> 00001,
 					:email 			=> "email.goes.here@gmail.com",
 					:password 		=> "password_goes_here",
 					:workspace_id 	=> 00001,
-					:permission 	=> "account_admin"
+					:permission 	=> "access_group_name_goes_here"
 				}
 			]
 		}

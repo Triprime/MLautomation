@@ -1,4 +1,4 @@
-require_relative '../helpers/test_helper'
+require_relative '../helpers/require_helper'
 
 class NavigationTests < Test::Unit::TestCase
 
@@ -12,10 +12,14 @@ class NavigationTests < Test::Unit::TestCase
 
 	# for a specific user/permission level, tests to reach a set of expected urls
 	def test_punchclock_urls
+		# before running test, make sure to set an environment variable in the temrinal like so:
+		# export environment=mwho
+
 		# set permission level and environment for test	
-		@location 		= ENV['environment']
-		# @location 		= "mwho"
-		@permission 	= "punch_clock"
+		# @location 		= ENV['environment'] # this only works if an environment variable is set
+		@location 		= "mwho" # if an environment variable is not set, then explicitly use this environment
+		# @permission 	= "punch_clock"
+		@permission 	= "collaborator"
 
 		#get info for user appropriate to permissions type
 		@user_id 		= find_user_for_permission(@location,@permission)
@@ -33,6 +37,10 @@ class NavigationTests < Test::Unit::TestCase
 
 		# loop through access_group array containing all urls appropriate to this test
 		test_urls_for_permission(@permission)
+
+		@permission = "punch_clock"
+		test_urls_for_permission(@permission)
+
 		output_errors
 		logout
 	end
