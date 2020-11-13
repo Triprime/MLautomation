@@ -18,7 +18,7 @@ class NavigationTests < Test::Unit::TestCase
 		# set permission level and environment for test	
 		# @location 		= ENV['environment'] # this only works if an environment variable is set
 		@location 		= "mwho" # if an environment variable is not set, then explicitly use this environment
-		@permission 	= "punch_clock"
+		@permission 	= "project_lead"
 
 		#get info for user appropriate to permissions type
 		@user_id 		= find_user_for_permission(@location,@permission)

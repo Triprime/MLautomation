@@ -189,6 +189,44 @@ class AGData
 				}
 			]
 		},
+		{ 
+			:group_name		=> "project_creator",
+			:urls 			=>
+			[
+				{   
+					:description	=>	"PROJECTS > New Project", 
+					:url  			=>	"/workspaces/new"
+				},
+				{   
+					:description	=>	"TEMPLATES > All Templates", 
+					:url  			=>	"/project_templates"
+				},
+				{   
+					:description	=>	"TEMPLATES > All Templates > New Template", 
+					:url  			=>	"/project_templates#new"
+				}
+			]
+		},
+		{ # TODO: create methods for start_date and end_date in yyyy-mm-dd format
+			# it appears that start_date could always be first day of the current month, or current day,
+			# and end_date could always be current day
+			:group_name		=> "project_lead",
+			:urls 			=>
+			[
+				{   
+					:description	=>	"TIME & EXPENSE > Time Approvals | Submitted", 
+					:url  			=>	"/time_entries?tab=time+approvals#personnel/submitted?startDate=#{Time.now.strftime("%Y-%m-%d")}&endDate=#{Time.now.strftime("%Y-%m-%d")}&yourProjects=true"
+				},
+				{   
+					:description	=>	"TIME & EXPENSE > Time Approvals | Unsubmitted", 
+					:url  			=>	"/time_entries?tab=time+approvals#personnel/unsubmitted?startDate=#{Time.now.strftime("%Y-%m-%d")}&endDate=#{Time.now.strftime("%Y-%m-%d")}&yourProjects=true"
+				},
+				{   
+					:description	=>	"TIME & EXPENSE > Time Approvals | Rejected", 
+					:url  			=>	"/time_entries?tab=time+approvals#personnel/rejected?startDate=#{Time.now.strftime("%Y-%m-%d")}&endDate=#{Time.now.strftime("%Y-%m-%d")}&yourProjects=true"
+				}
+			]
+		},
 		{ # this is a template for how to set up urls for a specific access group 
 			:group_name		=> "access group name goes here",
 			:urls 			=>
@@ -199,7 +237,7 @@ class AGData
 				},
 				{   
 					:description	=>	"MAIN NAV > Sub-nav > View | Tab", 
-					:url  			=>	"url goes here"
+					:url  			=>	"url endpoint only"
 				}
 			]
 		}

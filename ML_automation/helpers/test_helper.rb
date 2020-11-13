@@ -29,14 +29,14 @@ def check_for_privileges(full_url)
 	end
 end
 
-def output_url_results(full_url)
-	# check for errors (an error does not automatically cause the test to fail)
-	error = false
+def check_for_page_errors(full_url)
+	# an error does not automatically cause the test to fail
+	error_exists = false
 	if check_for_404(full_url) == true || check_for_privileges(full_url) == true
-		error = true
+		error_exists = true
 	end
 
-	output_url(full_url,error)
+	output_url(full_url,error_exists)
 end
 
 def output_errors
@@ -60,13 +60,13 @@ def output_errors
 	# puts(" #{@errors_404.length}: 404 Error".red)
 	puts(" #{error_count_404} - 404 Error")
 	@errors_404.each do |url|
-		puts("    #{url}\n")
+		puts("      #{url}\n")
 	end
 
 	# puts(" #{@errors_permission.length}: Permission denied".red)
 	puts(" #{error_count_permission} - Permission denied")
 	@errors_permission.each do |url|
-		puts("    #{url}\n")
+		puts("      #{url}\n")
 	end
 end
 
@@ -75,8 +75,8 @@ def build_url(url_endpoint)
 	return base_url+url_endpoint 
 end
 
-def output_url(url,error)
-	if error == true
+def output_url(url,error_exists)
+	if error_exists == true
 		url_result = "GET #{url}".red
 	else
 		url_result = "GET #{url}".green
@@ -99,7 +99,7 @@ def test_urls_for_permission(permission)
 				puts("#{i+1}  #{url_data[:description]}")
 				get_url(full_url)
 				sleep 0.3
-				output_url_results(full_url)
+				check_for_page_errors(full_url)
 
 				i+=1
 			end
@@ -116,7 +116,8 @@ def count_urls_for_permission(permission)
 	end
 end
 
-def output_intro(total_urls,permission)
+def output_intro(permission)
+	total_urls = count_urls_for_permission(permission)
 	puts("\nVerify that user can reach #{total_urls.to_s.yellow.bold} expected urls for permission: #{permission.yellow.bold}")
 end
 
