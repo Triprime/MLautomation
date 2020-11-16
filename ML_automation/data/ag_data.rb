@@ -164,19 +164,19 @@ class AGData
 					:url  			=>	"/settings/export"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
-				},
+				}
 				# {   
 				# 	:description	=>	"BILLING > Invoices (should not have permission)", 
 				# 	:url  			=>	"/invoices"
 				# 	# :locator_type 	=>	:none,
 				# 	# :locator 		=> 	""
 				# },
-				{   
-					:description	=>	"BILLING > Invoices (should 404 - incorrect url)", 
-					:url  			=>	"/invoicess"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				}
+				# {   
+				# 	:description	=>	"BILLING > Invoices (should 404 - incorrect url)", 
+				# 	:url  			=>	"/invoicess"
+				# 	# :locator_type 	=>	:none,
+				# 	# :locator 		=> 	""
+				# }
 			]
 		},
 		{
@@ -207,9 +207,7 @@ class AGData
 				}
 			]
 		},
-		{ # TODO: create methods for start_date and end_date in yyyy-mm-dd format
-			# it appears that start_date could always be first day of the current month, or current day,
-			# and end_date could always be current day
+		{ 
 			:group_name		=> "project_lead",
 			:urls 			=>
 			[
@@ -224,7 +222,16 @@ class AGData
 				{   
 					:description	=>	"TIME & EXPENSE > Time Approvals | Rejected", 
 					:url  			=>	"/time_entries?tab=time+approvals#personnel/rejected?startDate=#{Time.now.strftime("%Y-%m-%d")}&endDate=#{Time.now.strftime("%Y-%m-%d")}&yourProjects=true"
+				},
+				{   
+					:description	=>	"BILLING > Invoices", 
+					:url  			=>	"/invoices"
+				},
+				{   
+					:description	=>	"BILLING > Invoices | Create across projects by client", 
+					:url  			=>	"/invoices/multi_projects?create=true"
 				}
+
 			]
 		},
 		{ # this is a template for how to set up urls for a specific access group 

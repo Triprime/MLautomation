@@ -18,7 +18,7 @@ class NavigationTests < Test::Unit::TestCase
 		# set permission level and environment for test	
 		# @location 		= ENV['environment'] # this only works if an environment variable is set
 		@location 		= "mwho" # if an environment variable is not set, then explicitly use this environment
-		@permission 	= "collaborator"
+		@permission 	= "project_creator"
 
 		#get info for user appropriate to permissions type
 		@user_id 		= find_user_for_permission(@location,@permission)
@@ -28,13 +28,15 @@ class NavigationTests < Test::Unit::TestCase
 		@errors_404				= Array.new
 		@errors_permission		= Array.new
 
+
 		login_with_user(@location,@user_id)
+		
 		# get and output total number of urls to check during this test
+		total_urls 		= count_urls_for_permission(@permission)		
 		output_intro(@permission)	
 
 		# loop through access_group array containing all urls appropriate to this test
 		test_urls_for_permission(@permission)
-
 		output_error_summary
 		logout
 	end

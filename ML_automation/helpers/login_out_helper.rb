@@ -4,7 +4,7 @@ def login_with_user(location,id)
 	password 	= get_user_password(users,id)
 	login_url	= EnvironmentData.get_base_url+"/login"
 
-	puts("\nUser:  #{email}\nLogin: #{login_url}")
+	puts("\nLogin:  #{login_url}\nUser:  #{email}\nPermission:  #{@permission}".yellow)
 
 	get_url(login_url)
 	click(:id, "login_email_address")
@@ -16,6 +16,14 @@ def login_with_user(location,id)
 	# click(:css, ".form_login__3K3lx") # seems to be deprecated as of 11/9/20
 	# click(:css, ".form_form__login--3K3lx")
 	click(:xpath, "//button[contains(.,'Login')]")
+	close_modal()
+end
+
+def close_modal
+	if @selenium.find_elements(:css, ".ui-button-icon-primary").size > 0
+		puts("\nClosing modal".yellow)
+		click(:css, ".ui-button-icon-primary")
+	end
 end
 
 def logout
@@ -24,7 +32,7 @@ def logout
 	# go to dashboard. this is required if trying to logout from a 404 error page
 	dashboard_url = EnvironmentData.get_base_url+"/users/#{@user_id}/dashboard"
 	get_url(dashboard_url)
-	sleep 0.3
+	sleep 0.4
 
 	click(:css, ".user-settings-menu-toggle-name")
 	click(:link_text, "Sign Out")

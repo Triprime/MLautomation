@@ -47,11 +47,10 @@ class UserData
 				}
 			]
 		},
-		{
+		{ # this is an example/template
 			:environment 	=> "production",
 			:users			=> [
 				{
-					# this is an example/template
 					:user_id 		=> 00001,
 					:email 			=> "email.goes.here@gmail.com",
 					:password 		=> "password_goes_here",

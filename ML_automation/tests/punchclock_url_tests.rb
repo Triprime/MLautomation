@@ -37,7 +37,7 @@ class NavigationTests < Test::Unit::TestCase
 
 		# loop through access_group array containing all urls appropriate to this test
 		test_urls_for_permission(@permission)
-		output_errors
+		output_error_summary
 		logout
 	end
 

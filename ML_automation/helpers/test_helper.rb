@@ -20,7 +20,8 @@ def check_for_404(full_url)
 end
 
 def check_for_privileges(full_url)
-	if @selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0
+	if (@selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0 ||
+		@selenium.find_elements(:xpath, "//a[contains(text(),'Back to your dashboard')]").size > 0)
 		puts("    NO PRIVILEGES".red)
 		@errors_permission << full_url
 		return true
@@ -39,7 +40,7 @@ def check_for_page_errors(full_url)
 	output_url(full_url,error_exists)
 end
 
-def output_errors
+def output_error_summary
 	puts("\nError counts")
 
 	error_count_404 = ""
