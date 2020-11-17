@@ -17,7 +17,7 @@ class NavigationTests < Test::Unit::TestCase
 		@errors_permission		= Array.new
 
 		# array of all permissions to test for url access
-		permissions = ["punch_clock",
+		url_groups = ["punch_clock",
 			"collaborator",
 			"project_creator",
 			"project_lead"
@@ -27,25 +27,28 @@ class NavigationTests < Test::Unit::TestCase
 		# export environment=mwho
 
 		# set permission level and environment for test	
-		# @location 		= ENV['environment'] # this only works if an environment variable is set
-		@location 		= "mwho" # if an environment variable is not set, then explicitly use this environment
-		# @permission 	= "punch_clock"
-		# @permission 	= "collaborator"
-		# @permission 	= "project_creator"
-		@permission 	= "project_lead"
+		# location 		= ENV['environment'] # this only works if an environment variable is set
+		location 		= "mwho" # if an environment variable is not set, then explicitly use this environment
+		# permission 	= "punch_clock"
+		permission 	= "collaborator"
+		# permission 	= "project_creator"
+		# permission 	= "project_lead"
 
 		#get info for user appropriate to permissions type
-		@user_id 		= find_user_for_permission(@location,@permission)
-		@workspace_id 	= get_user_workspace_id(@location,@user_id)
+		@user_id 		= find_user_for_permission(location,permission)
+		@workspace_id 	= get_user_workspace_id(location,@user_id)
 
-		login_with_user(@location,@user_id)
+		login_with_user(location,@user_id,permission)
 
-		permissions.each do |permission|
+		url_groups.each do |url_group|
+			# set expectation for url_group based on user permission
+			expectation = set_expectation(url_group,permission)
+
 			# get and output total number of urls to check during this test
-			output_intro(permission)	
+			output_intro(url_group,permission,expectation)	
 
 			# loop through access_group array containing all urls appropriate to this test
-			test_urls_for_permission(permission)
+			test_urls_for_permission(url_group)
 		end
 
 		output_error_summary

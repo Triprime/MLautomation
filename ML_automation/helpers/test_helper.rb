@@ -37,7 +37,7 @@ def check_for_page_errors(full_url)
 		error_exists = true
 	end
 
-	output_url(full_url,error_exists)
+	return error_exists
 end
 
 def output_error_summary
@@ -93,14 +93,15 @@ def test_urls_for_permission(permission)
 		if url_group[:group_name] == permission
 			urls = url_group[:urls]
 
-			i = 0
+			i = 1
 			urls.each do |url_data|
 				full_url = build_url(url_data[:url])
 				
-				puts("#{i+1}  #{url_data[:description]}")
+				puts("#{i}  #{url_data[:description]}")
 				get_url(full_url)
 				sleep 0.3
-				check_for_page_errors(full_url)
+				error_exists = check_for_page_errors(full_url)
+				output_url(full_url,error_exists)
 
 				i+=1
 			end
@@ -108,18 +109,26 @@ def test_urls_for_permission(permission)
 	end
 end
 
-def count_urls_for_permission(permission)
+def count_urls_for_group(group_name)
 	urls_array = AGData.ag_urls_array
 	urls_array.each do |url_group|
-		if url_group[:group_name] == permission
+		if url_group[:group_name] == group_name
 			return url_group[:urls].count
 		end
 	end
 end
 
-def output_intro(permission)
-	total_urls = count_urls_for_permission(permission)
-	puts("\nVerify that user can reach #{total_urls.to_s.yellow.bold} expected urls for permission: #{permission.yellow.bold}")
+def output_intro(url_group,user_permission,expectation)
+	if expectation == false
+		expectation_string = "false".red.bold
+	else
+		expectation_string = "true".green.bold
+	end
+
+	total_urls = count_urls_for_group(url_group)
+	puts("\nVerify if user can reach #{total_urls.to_s.yellow.bold} urls for url_group: #{url_group.yellow.bold}.")
+	puts("Expect that user with permission #{user_permission.yellow.bold} has permission: #{expectation_string}")
+	puts("\n")
 end
 
 def find_user_for_permission(location,permission)
@@ -154,4 +163,16 @@ def get_user_workspace_id(location,id)
 			end
 		end
 	end
+end
+
+def set_expectation(url_group,user_permission)
+	expectation = false
+
+	if user_permission == url_group
+		expectation = true
+	elsif user_permission == "collaborator" && url_group == "punch_clock"
+		expectation = true 
+	end
+
+	return expectation
 end

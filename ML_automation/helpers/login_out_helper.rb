@@ -1,10 +1,10 @@
-def login_with_user(location,id)
+def login_with_user(location,id,user_permission)
 	users 		= get_users_for_environment(location)
 	email 		= get_user_email(users,id)
 	password 	= get_user_password(users,id)
 	login_url	= EnvironmentData.get_base_url+"/login"
 
-	puts("\nLogin:  #{login_url}\nUser:  #{email}\nPermission:  #{@permission}".yellow)
+	puts("\nLogin url:  #{login_url}\nUser email:  #{email}\nUser permission:  #{user_permission}".yellow)
 
 	get_url(login_url)
 	click(:id, "login_email_address")
