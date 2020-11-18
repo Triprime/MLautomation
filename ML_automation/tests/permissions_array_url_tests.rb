@@ -16,7 +16,7 @@ class NavigationTests < Test::Unit::TestCase
 		@errors_404				= Array.new
 		@errors_permission		= Array.new
 
-		# array of all permissions to test for url access
+		# array of all urls to test for user access
 		url_groups = ["punch_clock",
 			"collaborator",
 			"project_creator",

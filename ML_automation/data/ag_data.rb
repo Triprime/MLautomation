@@ -7,11 +7,13 @@ class AGData
 			# :default_group 	=> true,
 			# :view_only		=> false,
 			# :participant 	=> "contributor",
+			:included_url_groups => [],
 			:urls 			=>
 			[ 
 				{   
 					:description	=>	"DASHBOARD > Your Dashboard", 
-					:url  			=>	"/users/#{user_id}/dashboard?tab=your-dashboard"
+					:url  			=>	"/users/#{user_id}/dashboard?tab=your-dashboard",
+					:plans			=>	["enterprise","premier","pro","teams","free"],
 					# :locator_type 	=>	:css,
 					# :locator 		=> 	".dashboard-tab"
 				},
@@ -181,6 +183,7 @@ class AGData
 		},
 		{
 			:group_name		=> "collaborator",
+			:included_url_groups => ["punch_clock"],
 			:urls 			=>
 			[
 				{
@@ -191,6 +194,7 @@ class AGData
 		},
 		{ 
 			:group_name		=> "project_creator",
+			:included_url_groups => ["punch_clock","collaborator"],
 			:urls 			=>
 			[
 				{   
@@ -209,6 +213,7 @@ class AGData
 		},
 		{ 
 			:group_name		=> "project_lead",
+			:included_url_groups => ["punch_clock","collaborator","project_creator"],
 			:urls 			=>
 			[
 				{   

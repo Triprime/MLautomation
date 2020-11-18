@@ -127,8 +127,8 @@ def output_intro(url_group,user_permission,expectation)
 
 	total_urls = count_urls_for_group(url_group)
 	puts("\nVerify if user can reach #{total_urls.to_s.yellow.bold} urls for url_group: #{url_group.yellow.bold}.")
-	puts("Expect that user with permission #{user_permission.yellow.bold} has permission: #{expectation_string}")
-	puts("\n")
+	puts("Expect that user with permission #{user_permission.yellow.bold} has access: #{expectation_string}")
+	# puts("\n")
 end
 
 def find_user_for_permission(location,permission)
@@ -168,11 +168,23 @@ end
 def set_expectation(url_group,user_permission)
 	expectation = false
 
-	if user_permission == url_group
+	included_url_groups = get_included_url_groups(user_permission)
+	puts("Included url groups: #{included_url_groups}")
+
+	if url_group == user_permission 
 		expectation = true
-	elsif user_permission == "collaborator" && url_group == "punch_clock"
-		expectation = true 
+	elsif included_url_groups.include? url_group
+		expectation = true		
 	end
 
 	return expectation
+end
+
+def get_included_url_groups(user_permission)
+	urls_array = AGData.ag_urls_array
+	urls_array.each do |url_group|
+		if url_group[:group_name] == user_permission
+			return url_group[:included_url_groups]
+		end
+	end
 end
