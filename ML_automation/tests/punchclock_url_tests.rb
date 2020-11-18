@@ -12,9 +12,7 @@ class NavigationTests < Test::Unit::TestCase
 
 	# for a specific user/permission level, tests to reach a set of expected urls
 	def test_urls
-		# arrays to hold error info
-		@errors_404				= Array.new
-		@errors_permission		= Array.new
+		initialize_variables
 
 		# array of urls to test for user access
 		url_group 		= "punch_clock"

@@ -221,3 +221,13 @@ def update_counts(error_exists,expectation)
 		# @actual_no_access+=1
 	end
 end
+
+def initialize_variables
+	# arrays to hold error info
+	@errors_404				= Array.new
+	@errors_permission		= Array.new
+	@expected_access		= 0
+	@expected_no_access		= 0
+	@actual_access			= 0
+	@actual_no_access		= 0
+end

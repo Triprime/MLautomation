@@ -15,13 +15,7 @@ class NavigationTests < Test::Unit::TestCase
 	# and verify if that user has access to urls they should NOT be able to access.
 	# The test uses direct url GETs instead of UI navigation.
 	def test_urls
-		# arrays to hold error info
-		@errors_404				= Array.new
-		@errors_permission		= Array.new
-		@expected_access		= 0
-		@expected_no_access		= 0
-		@actual_access			= 0
-		@actual_no_access		= 0
+		initialize_variables
 
 		# arrays of urls to test for user access
 		url_groups = ["punch_clock",
