@@ -40,8 +40,8 @@ def check_for_page_errors(full_url)
 	return error_exists
 end
 
-def output_error_summary
-	puts("\nError counts")
+def output_summary
+	puts("\nResults:")
 
 	error_count_404 = ""
 	error_count_permission = ""
@@ -58,14 +58,23 @@ def output_error_summary
 		error_count_permission = "#{@errors_permission.length}".green
 	end
 
-	# puts(" #{@errors_404.length}: 404 Error".red)
-	puts(" #{error_count_404} - 404 Error")
+	if @actual_access == @expected_access
+		access_string = "#{@actual_access}/#{@expected_access}".green
+		no_access_string = "#{@actual_no_access}/#{@expected_no_access}".green
+	else
+		access_string = "#{@actual_access}/#{@expected_access}".red
+		no_access_string = "#{@actual_no_access}/#{@expected_no_access}".red
+	end
+
+	puts("Expect user has access     (#{access_string})")
+	puts("Expect user has no access  (#{no_access_string})")
+
+	puts("#{error_count_404} - 404 Error")
 	@errors_404.each do |url|
 		puts("      #{url}\n")
 	end
 
-	# puts(" #{@errors_permission.length}: Permission denied".red)
-	puts(" #{error_count_permission} - Permission denied")
+	puts("#{error_count_permission} - Permission denied")
 	@errors_permission.each do |url|
 		puts("      #{url}\n")
 	end
@@ -87,10 +96,10 @@ def output_url(url,error_exists)
 	puts("    #{url_result}")
 end
 
-def test_urls_for_permission(permission)
+def test_urls_for_permission(group_name,expectation)
 	urls_array = AGData.ag_urls_array(@user_id,@workspace_id)
 	urls_array.each do |url_group|
-		if url_group[:group_name] == permission
+		if url_group[:group_name] == group_name
 			urls = url_group[:urls]
 
 			i = 1
@@ -102,6 +111,7 @@ def test_urls_for_permission(permission)
 				sleep 0.3
 				error_exists = check_for_page_errors(full_url)
 				output_url(full_url,error_exists)
+				update_counts(error_exists,expectation)
 
 				i+=1
 			end
@@ -167,9 +177,8 @@ end
 
 def set_expectation(url_group,user_permission)
 	expectation = false
-
 	included_url_groups = get_included_url_groups(user_permission)
-	puts("Included url groups: #{included_url_groups}")
+	# puts("Included url groups: #{included_url_groups}")
 
 	if url_group == user_permission 
 		expectation = true
@@ -186,5 +195,29 @@ def get_included_url_groups(user_permission)
 		if url_group[:group_name] == user_permission
 			return url_group[:included_url_groups]
 		end
+	end
+end
+
+def update_counts(error_exists,expectation)
+	if expectation == true && error_exists == false
+		@expected_access+=1
+		# @expected_no_access+=1
+		@actual_access+=1
+		# @actual_no_access+=1
+	elsif 	expectation == true && error_exists == true
+		@expected_access+=1
+		# @expected_no_access+=1
+		# @actual_access+=1
+		@actual_no_access+=1
+	elsif 	expectation == false && error_exists == true
+		# @expected_access+=1
+		@expected_no_access+=1
+		# @actual_access+=1
+		@actual_no_access+=1
+	elsif 	expectation == false && error_exists == false
+		# @expected_access+=1
+		@expected_no_access+=1
+		@actual_access+=1
+		# @actual_no_access+=1
 	end
 end
