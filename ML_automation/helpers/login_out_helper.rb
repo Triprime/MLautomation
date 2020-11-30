@@ -5,6 +5,7 @@ def login_with_user(location,id,user_permission)
 	login_url	= EnvironmentData.get_base_url+"/login"
 
 	puts("\nLogin url:   #{login_url.bold.yellow}\nUser email:  #{email.bold.yellow}\nUser permission:  #{user_permission.bold.yellow}")
+	puts("URL groups to test: #{set_url_groups.to_s.bold.yellow}")
 
 	get_url(login_url)
 	click(:id, "login_email_address")

@@ -42,13 +42,13 @@ end
 def output_summary
 	puts("\nResults:".bold.yellow)
 
+	error_count_404 		= set_color_error_count_404
+	error_count_permission 	= set_color_error_count_permission
+
 	puts("404 Errors #{error_count_404}")
 	@errors_404.each do |url|
 		puts("    #{url}\n")
 	end
-
-	error_count_404 		= set_color_error_count_404
-	error_count_permission 	= set_color_error_count_permission
 
 	if @actual_access_count == @expected_access_count
 		access_string = "#{@actual_access_count}/#{@expected_access_count}".green
@@ -160,7 +160,7 @@ def output_intro(url_group,user_permission,expectation)
 	end
 
 	total_urls = count_urls_for_group(url_group)
-	puts("\nVerify if user can reach #{total_urls.to_s.yellow.bold} urls for url_group: #{url_group.yellow.bold}.")
+	puts("\nVerify if user can reach #{total_urls.to_s.yellow.bold} urls for access group: #{url_group.yellow.bold}.")
 	puts("Expect that user with permission #{user_permission.yellow.bold} has access: #{expectation_string}")
 	# puts("\n")
 end
@@ -264,4 +264,18 @@ def initialize_variables
 	@expected_no_access_count	= 0
 	@actual_access_count		= 0
 	@actual_no_access_count		= 0
+end
+
+def set_url_groups
+	if (ENV['urls'] == "all" || ENV['urls'] == "")
+		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead"]
+	elsif ENV['urls'] == "punch_clock" || ENV['urls'] # == "only_punch_clock"
+		urls_to_test = ["punch_clock"]
+	elsif ENV['urls'] == "collaborator"
+		urls_to_test = ["punch_clock","collaborator"]
+	elsif ENV['urls'] == "project_creator"
+		urls_to_test = ["punch_clock","collaborator","project_creator"]
+	end
+
+	return urls_to_test			
 end

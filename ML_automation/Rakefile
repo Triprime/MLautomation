@@ -1,0 +1,13 @@
+# Rakefile
+
+task :url_tests do
+	ARGV.each { |a| task a.to_sym do ; end }
+
+	ENV['environment']=ARGV[1].to_s
+	ENV['permission']=ARGV[2].to_s
+	ENV['urls']=ARGV[3].to_s || "all"
+
+	# puts "\nOn the #{ARGV[1].to_s} environment, verify if a user with #{ARGV[2].to_s} permission can access certain urls"
+
+	ruby "tests/url_tests.rb"
+end
