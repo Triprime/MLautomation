@@ -23,3 +23,11 @@ def get_url(url)
 	@selenium.get(url)
 	check_for_502
 end
+
+def element_displayed?(type,element)
+	if @selenium.find_elements(type, element).size > 0
+		return true
+	else
+		return false
+	end
+end

@@ -1,7 +1,6 @@
-
 def check_for_502
 	# TODO - implement retry loop instead of potential infinite loop
-	if @selenium.find_elements(:xpath, "//*[text()='502 Bad Gateway']").size > 0
+	if element_displayed?(:xpath, "//*[text()='502 Bad Gateway']")
 		puts("    502 ERROR.  Refreshing...".yellow)
 		@selenium.get(@selenium.current_url)
 		sleep 1
@@ -10,7 +9,7 @@ def check_for_502
 end
 
 def check_for_404(full_url)
-	if @selenium.find_elements(:xpath, "//*[text()='404 Error']").size > 0
+	if element_displayed?(:xpath, "//*[text()='404 Error']")
 		puts("    404 ERROR".red)
 		@errors_404 << full_url
 		return true
@@ -20,8 +19,8 @@ def check_for_404(full_url)
 end
 
 def check_for_privileges(full_url)
-	if (@selenium.find_elements(:xpath, "//*[contains(text(),'account privileges')]").size > 0 ||
-		@selenium.find_elements(:xpath, "//a[contains(text(),'Back to your dashboard')]").size > 0)
+	if 	element_displayed?(:xpath, "//*[contains(text(),'account privileges')]") ||
+		element_displayed?(:xpath, "//a[contains(text(),'Back to your dashboard')]")
 		puts("    NO PRIVILEGES".red)
 		@errors_permission << full_url
 		return true
@@ -41,44 +40,68 @@ def check_for_page_errors(full_url)
 end
 
 def output_summary
-	puts("\nResults:")
+	puts("\nResults:".bold.yellow)
 
-	error_count_404 = ""
-	error_count_permission = ""
-
-	if @errors_404.length > 0
-		error_count_404 = "#{@errors_404.length}".red
-	else
-		error_count_404 = "#{@errors_404.length}".green
-	end
-
-	if @errors_permission.length > 0
-		error_count_permission = "#{@errors_permission.length}".red
-	else
-		error_count_permission = "#{@errors_permission.length}".green
-	end
-
-	if @actual_access == @expected_access
-		access_string = "#{@actual_access}/#{@expected_access}".green
-		no_access_string = "#{@actual_no_access}/#{@expected_no_access}".green
-	else
-		access_string = "#{@actual_access}/#{@expected_access}".red
-		no_access_string = "#{@actual_no_access}/#{@expected_no_access}".red
-	end
-
-	puts("Expect user has access     (#{access_string})")
-	puts("Expect user has no access  (#{no_access_string})")
-
-	puts("#{error_count_404} - 404 Error")
+	puts("404 Errors #{error_count_404}")
 	@errors_404.each do |url|
-		puts("      #{url}\n")
+		puts("    #{url}\n")
 	end
 
-	puts("#{error_count_permission} - Permission denied")
-	@errors_permission.each do |url|
-		puts("      #{url}\n")
+	error_count_404 		= set_color_error_count_404
+	error_count_permission 	= set_color_error_count_permission
+
+	if @actual_access_count == @expected_access_count
+		access_string = "#{@actual_access_count}/#{@expected_access_count}".green
+		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".green
+	else
+		access_string = "#{@actual_access_count}/#{@expected_access_count}".red
+		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".red
 	end
+
+	puts("User does have access      ( #{access_string} )")
+	puts("User does not have access  ( #{no_access_string} )")
+
+	if(@should_but_didnt.count > 0)
+		puts("URLS that user should have access to, but was unable to access:")
+		@should_but_didnt.each do |url|
+			puts("  #{url}\n")
+		end
+	end
+
+	if(@shouldnt_but_did.count > 0)
+		puts("URLS that user should NOT have access to, but was able to access:")
+		@shouldnt_but_did.each do |url|
+			puts("  #{url}\n")
+		end
+	end
+
+	# puts("Permission denied #{error_count_permission}")
+	# @errors_permission.each do |url|
+	# 	puts("    #{url}\n")
+	# end
+
 end
+
+def set_color_error_count_404
+	colorized_string = ""
+	if @errors_404.length > 0
+		colorized_string = "#{@errors_404.length}".red
+	else
+		colorized_string = "#{@errors_404.length}".green
+	end
+	return colorized_string
+end
+
+def set_color_error_count_permission
+	colorized_string = ""
+	if @errors_permission.length > 0
+		colorized_string = "#{@errors_permission.length}".red
+	else
+		colorized_string = "#{@errors_permission.length}".green
+	end
+	return colorized_string
+end
+
 
 def build_url(url_endpoint)
 	base_url = EnvironmentData.get_base_url
@@ -112,6 +135,7 @@ def test_urls_for_permission(group_name,expectation)
 				error_exists = check_for_page_errors(full_url)
 				output_url(full_url,error_exists)
 				update_counts(error_exists,expectation)
+				update_arrays(full_url,error_exists,expectation)
 
 				i+=1
 			end
@@ -200,25 +224,33 @@ end
 
 def update_counts(error_exists,expectation)
 	if expectation == true && error_exists == false
-		@expected_access+=1
-		# @expected_no_access+=1
-		@actual_access+=1
-		# @actual_no_access+=1
+		@expected_access_count+=1
+		# @expected_no_access_count+=1
+		@actual_access_count+=1
+		# @actual_no_access_count+=1
 	elsif 	expectation == true && error_exists == true
-		@expected_access+=1
-		# @expected_no_access+=1
-		# @actual_access+=1
-		@actual_no_access+=1
+		@expected_access_count+=1
+		# @expected_no_access_count+=1
+		# @actual_access_count+=1
+		@actual_no_access_count+=1
 	elsif 	expectation == false && error_exists == true
-		# @expected_access+=1
-		@expected_no_access+=1
-		# @actual_access+=1
-		@actual_no_access+=1
+		# @expected_access_count+=1
+		@expected_no_access_count+=1
+		# @actual_access_count+=1
+		@actual_no_access_count+=1
 	elsif 	expectation == false && error_exists == false
-		# @expected_access+=1
-		@expected_no_access+=1
-		@actual_access+=1
-		# @actual_no_access+=1
+		# @expected_access_count+=1
+		@expected_no_access_count+=1
+		@actual_access_count+=1
+		# @actual_no_access_count+=1
+	end
+end
+
+def update_arrays(full_url,error_exists,expectation)
+	if expectation == true && error_exists == true
+		@should_but_didnt << full_url
+	elsif 	expectation == false && error_exists == false
+		@shouldnt_but_did << full_url
 	end
 end
 
@@ -226,8 +258,10 @@ def initialize_variables
 	# arrays to hold error info
 	@errors_404				= Array.new
 	@errors_permission		= Array.new
-	@expected_access		= 0
-	@expected_no_access		= 0
-	@actual_access			= 0
-	@actual_no_access		= 0
+	@should_but_didnt		= Array.new
+	@shouldnt_but_did		= Array.new
+	@expected_access_count		= 0
+	@expected_no_access_count	= 0
+	@actual_access_count		= 0
+	@actual_no_access_count		= 0
 end

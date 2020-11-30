@@ -1,4 +1,12 @@
 require_relative '../helpers/require_helper'
+# This test will login with a user who has a specific permission,
+# then verify if that user has access to urls they should be able to access,
+# and verify if that user has access to urls they should NOT be able to access.
+# The test uses direct url GETs instead of UI navigation.
+
+# Before running test, set an environment variable in the terminal like so:
+# export environment=mwho
+# Alternatively, explicitly set the environment in the test method
 
 class NavigationTests < Test::Unit::TestCase
 
@@ -10,12 +18,20 @@ class NavigationTests < Test::Unit::TestCase
 		@selenium.quit
 	end
 
-	# This test will login with a user who has a specific permission,
-	# then verify if that user has access to urls they should be able to access,
-	# and verify if that user has access to urls they should NOT be able to access.
-	# The test uses direct url GETs instead of UI navigation.
 	def test_urls
 		initialize_variables
+
+		# if an environment variable IS set via the terminal...
+		location 		= ENV['environment'] # this only works if an environment variable is set
+		# if an environment variable IS NOT set via the terminal...
+		# manually set testing environment by hardcoding it here
+		# location 		= "mwho" 
+		
+		# set user permission level (pick one)
+		permission 		= "punch_clock"
+		# permission 		= "collaborator"
+		# permission 		= "project_creator"
+		# permission 		= "project_lead"
 
 		# arrays of urls to test for user access
 		url_groups = ["punch_clock",
@@ -23,20 +39,6 @@ class NavigationTests < Test::Unit::TestCase
 			"project_creator",
 			"project_lead"
 			]
-
-		# before running test, set an environment variable in the terminal like so:
-		# export environment=mwho
-		# location 		= ENV['environment'] # this only works if an environment variable is set
-
-		# if an environment variable is not set via the terminal...
-		# manually set testing environment by hardcoding it in this test spec
-		location 		= "mwho" 
-		
-		# set user permission level (pick one)
-		# permission 		= "punch_clock"
-		permission 		= "collaborator"
-		# permission 		= "project_creator"
-		# permission 		= "project_lead"
 
 		# based on user permisson, get user info necessary for login and testing
 		@user_id 		= find_user_for_permission(location,permission)

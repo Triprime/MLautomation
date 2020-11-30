@@ -14,9 +14,6 @@ class NavigationTests < Test::Unit::TestCase
 	def test_urls
 		initialize_variables
 
-		# array of urls to test for user access
-		url_group 		= "punch_clock"
-
 		# before running test, set an environment variable in the terminal like so:
 		# export environment=mwho
 		# location 		= ENV['environment'] # this only works if an environment variable is set
@@ -25,6 +22,7 @@ class NavigationTests < Test::Unit::TestCase
 		# manually set testing environment by hardcoding it in this test spec
 		location 		= "mwho" 
 		permission 		= "punch_clock" # set user permission level
+		url_group 		= "punch_clock" # array of urls to test for user access
 
 		# based on user permisson, get user info necessary for login and testing
 		@user_id 		= find_user_for_permission(location,permission)
