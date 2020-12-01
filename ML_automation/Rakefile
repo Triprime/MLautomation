@@ -10,7 +10,7 @@ task :help do
 	the urls they should be able to access, and not urls they shouldn't be able to access.
 
 	URL Access tests will not fail if expected access fails.
-	During the test, groups of urls will be tested via GET statements (not UI navigation).
+	During the test, groups of urls will be tested via GET requests (not UI navigation).
 	The result of each url GET will be displayed as the test progresses.
 	At the end of the test, a summary will display any discrepencies found.
 	
@@ -24,17 +24,19 @@ task :help do
 	
 	example: rake url_tests mwho project_lead all_defaults
 
-	rake 		is the test runner (required)
-	url_tests 	is the name of the test to be run (required)
-	mwho 		is the short name for the testing environment https://app.mwho.mvn.link/ (required, mwho is default)
-	project_lead	is the permission level (access_group) for the user to test with (required)
-	all_defaults	indicates that urls for all default access_groups will be attempted (all-defaults is the default setting and will be used if nothing is specified)
+	rake 		(required) is the test runner 
+	url_tests 	(required) is the name of the test to be run 
+	mwho 		(required) is the short name for the testing environment https://app.mwho.mvn.link/
+	project_lead	(required) is the permission level (access_group) for the user to be used for the test 
+	all_defaults	(optional) indicates that urls for all default access_groups will be attempted (if argument not provided, 'all_defaults' will be used)
 
 	This example will login on the mwho environment with a user that has project_lead permission,
 	then test to see if that user can access urls for all default access groups.
 	
 
-	NOTE: Currently, only the mwho environment has been setup to run URL Access tests. 
+	NOTE: Currently, only the mwho environment has been setup to run URL Access tests,
+	and only the 'url_tests' test is built to be used by rake. 
+	Not all urls have been included in each access_group at this point.
 	No Functional tests exist yet.
 	\n"
 end

@@ -39,6 +39,6 @@
   
 
 ## Running Tests (instructions in rake file)
-`cd MLautomation`
+`cd ML_automation`
 
 `rake`
