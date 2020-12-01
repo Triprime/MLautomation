@@ -14,7 +14,7 @@
 - Firefox: https://www.mozilla.org/en-US/firefox/mac/
 
 ### 2. Use Command Line Interface for MacOS
-- Terminal (install on Macs by default)
+- Terminal (installed on Macs by default)
 - CMD+space, then type: `terminal`
 
 ### 3. Create local directory for the project and cd to that directory
@@ -24,12 +24,13 @@
 
 ### 4. Install gems
 #### 4.a.  Install selenium-webdriver gem
-  `gem install selenium-webdriver`
+`gem install selenium-webdriver`
 #### 4.b.  Install colorize gem
-  `sudo gem install colorize`
+`sudo gem install colorize`
 #### 4.c.  Install geckodriver helper 
-- Only for MacOS 10.15 - This is a work around for a known issue with macOS 10.15 and geckodriver)
-- Source: https://rubygems.org/gems/geckodriver-helper/versions/0.0.3)
+- Only required for MacOS 10.15 
+- This is a work around for a known issue with MacOS 10.15 and geckodriver
+- Source: https://rubygems.org/gems/geckodriver-helper/versions/0.0.3
   
 `sudo gem install geckodriver-helper -v 0.0.3`
 #### 4.d.  Clone MLautomation repo to your local directory

@@ -43,7 +43,7 @@ def output_summary
 	puts("\nResults:".bold.yellow)
 
 	error_count_404 		= set_color_error_count_404
-	error_count_permission 	= set_color_error_count_permission
+	# error_count_permission 	= set_color_error_count_permission
 
 	puts("404 Errors: #{error_count_404}")
 	@errors_404.each do |url|
@@ -51,15 +51,15 @@ def output_summary
 	end
 
 	if @actual_access_count == @expected_access_count
-		access_string = "#{@actual_access_count}/#{@expected_access_count}".green
-		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".green
+		access_string = "#{@actual_access_count}/#{@expected_access_count}".bold.green
+		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".bold.green
 	else
-		access_string = "#{@actual_access_count}/#{@expected_access_count}".yellow
-		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".yellow
+		access_string = "#{@actual_access_count}/#{@expected_access_count}".bold.yellow
+		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".bold.yellow
 	end
 
-	puts("User does have access      ( #{access_string} ) actual/expected")
-	puts("User does not have access  ( #{no_access_string} ) actual/expected")
+	puts("User does have access     #{access_string}  (actual/expected)")
+	puts("User does not have access #{no_access_string}  (actual/expected)")
 
 	if(@should_but_didnt.count > 0)
 		puts("URLS that user SHOULD have access to, but was unable to access: #{@should_but_didnt.count.to_s.bold.yellow}")
@@ -85,9 +85,9 @@ end
 def set_color_error_count_404
 	colorized_string = ""
 	if @errors_404.length > 0
-		colorized_string = "#{@errors_404.length}".red
+		colorized_string = "#{@errors_404.length}".bold.red
 	else
-		colorized_string = "#{@errors_404.length}".green
+		colorized_string = "#{@errors_404.length}".bold.green
 	end
 	return colorized_string
 end
