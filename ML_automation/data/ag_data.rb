@@ -167,13 +167,7 @@ class AGData
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				}
-				# {   
-				# 	:description	=>	"BILLING > Invoices (should not have permission)", 
-				# 	:url  			=>	"/invoices"
-				# 	# :locator_type 	=>	:none,
-				# 	# :locator 		=> 	""
-				# },
-				# {   
+				# ,{   
 				# 	:description	=>	"BILLING > Invoices (should 404 - incorrect url)", 
 				# 	:url  			=>	"/invoicess"
 				# 	# :locator_type 	=>	:none,
@@ -238,6 +232,21 @@ class AGData
 				}
 
 			]
+		},
+		{ 
+			:group_name		=> "report_viewer",
+			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead"],
+			:urls 			=> []
+		},
+		{ 
+			:group_name		=> "report_viewer_with_cost",
+			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead","report_viewer"],
+			:urls 			=> []
+		},
+		{ 
+			:group_name		=> "admin",
+			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead","report_viewer","report_viewer_with_cost"],
+			:urls 			=> []
 		},
 		{ # this is a template for how to set up urls for a specific access group 
 			:group_name		=> "access group name goes here",

@@ -269,11 +269,11 @@ end
 
 def set_url_groups
 	if (ENV['urls'] == "all_defaults" || ENV['urls'] == "admin" || ENV['urls'] == "")
-		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead"]
+		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead","report_viewer","report_viewer_with_cost","admin"]
 	elsif (ENV['urls'] == "rvc" || ENV['urls'] == "report_viewer_with_cost")
-		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead"]
+		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead","report_viewer","report_viewer_with_cost"]
 	elsif (ENV['urls'] == "rv" || ENV['urls'] == "report_viewer")
-		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead"]
+		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead","report_viewer"]
 	elsif (ENV['urls'] == "prl" || ENV['urls'] == "punch_lead")
 		urls_to_test = ["punch_clock","collaborator","project_creator","project_lead"]
 	elsif (ENV['urls'] == "prc" || ENV['urls'] == "project_creator")

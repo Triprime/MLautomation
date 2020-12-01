@@ -9,7 +9,7 @@ class UserData
 					:user_id 		=> 41545,
 					:email 			=> "mavenlinkqa+automation@gmail.com",
 					:password 		=> "password",
-					:permission 	=> "account_admin",
+					:permission 	=> "admin",
 					:workspace_id 	=> 69665
 					
 				},
@@ -44,6 +44,22 @@ class UserData
 					:permission 	=> "project_lead",
 					:workspace_id 	=> 69665,
 					:template_id	=> 823355	
+				},
+				{
+					:user_id 		=> 41615,
+					:email 			=> "mavenlinkqa+auto.rv@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "report_viewer",
+					:workspace_id 	=> 69665,
+					:template_id	=> 823365	
+				},
+				{
+					:user_id 		=> 41625,
+					:email 			=> "mavenlinkqa+auto.rvc@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "report_viewer_with_cost",
+					:workspace_id 	=> 69665,
+					:template_id	=> 823375	
 				}
 			]
 		},
