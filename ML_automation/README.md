@@ -1,5 +1,5 @@
 # MavenLink Permissions Automation
----
+
 ## Selenium Setup (if you intend to contribute to developing the test repo)
 ### 1. Install Selenium IDE extension for Firefox browser
 - For Firefox: https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/
@@ -8,7 +8,7 @@
 - Sublime Text 
 - Other options to be added
 ### 3. Create Github account
----
+
 ## Local Setup (required to run the tests locally)
 ### 1. Install Firefox browser for Mac
 - Firefox: https://www.mozilla.org/en-US/firefox/mac/
@@ -32,7 +32,7 @@
 #### 4.d.  Clone MLautomation repo to your local directory
   `git clone https://github.com/Triprime/MLautomation.git`
   
----
+
 ## Running Tests
 `cd MLautomation`
 
