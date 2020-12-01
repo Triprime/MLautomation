@@ -24,11 +24,8 @@ class NavigationTests < Test::Unit::TestCase
 
 		login_with_user(location,@user_id,permission)
 		url_groups.each do |url_group|
-			# set test expectation for url_group based on user permission
 			expectation = set_expectation(url_group,permission)
-			# output info about each url test group
 			output_intro(url_group,permission,expectation)	
-			# verify if user can access each url in specific url_group
 			test_urls_for_permission(url_group,expectation)
 		end
 

@@ -1,13 +1,62 @@
 # Rakefile
+task default: [:help]
+
+task :help do
+	puts "
+	Permissions testing can be performed in two ways: URL Access or Functional.
+
+
+	URL Access tests check to see if a user who has a certain permission granted can access
+	the urls they should be able to access, and not urls they shouldn't be able to access.
+
+	URL Access tests will not fail if expected access fails.
+	During the test, groups of urls will be tested via GET statements (not UI navigation).
+	The result of each url GET will be displayed as the test progresses.
+	At the end of the test, a summary will display any discrepencies found.
+	
+
+	Functional tests check to see if a user can do a certain thing that should be allowed
+	by their granted permission(s). [These tests are not yet ready for use.]
+
+
+	To run a URL Access test, use the following structure to type a command in your terminal interface:
+	rake url_tests <environment> <user_permission> <url_groups_to_test>
+	
+	example: rake url_tests mwho project_lead all_defaults
+
+	rake 		is the test runner (required)
+	url_tests 	is the name of the test to be run (required)
+	mwho 		is the short name for the testing environment https://app.mwho.mvn.link/ (required, mwho is default)
+	project_lead	is the permission level (access_group) for the user to test with (required)
+	all_defaults	indicates that urls for all default access_groups will be attempted (all-defaults is the default setting and will be used if nothing is specified)
+
+	This example will login on the mwho environment with a user that has project_lead permission,
+	then test to see if that user can access urls for all default access groups.
+	
+
+	NOTE: Currently, only the mwho environment has been setup to run URL Access tests. 
+	No Functional tests exist yet.
+	\n"
+end
+
+task :example do
+	ARGV.each { |a| task a.to_sym do ; end }
+
+	ARGV.each do |a|
+		puts "#{a}"
+	end
+end
 
 task :url_tests do
 	ARGV.each { |a| task a.to_sym do ; end }
 
+	# 1st arg = environment to test on (mwho, prod, etc)
+	# 2nd arg = user permission/access_group to test with (punch_clock, collaborator, etc)
+	# 3rd arg = url groups to test against (all_defaults, rvc, rv, prl, prc, co, pc)
+
 	ENV['environment']=ARGV[1].to_s
 	ENV['permission']=ARGV[2].to_s
-	ENV['urls']=ARGV[3].to_s || "all"
-
-	# puts "\nOn the #{ARGV[1].to_s} environment, verify if a user with #{ARGV[2].to_s} permission can access certain urls"
+	ENV['urls']=ARGV[3].to_s || "all_defaults"
 
 	ruby "tests/url_tests.rb"
 end
