@@ -38,6 +38,7 @@
 `git clone https://github.com/Triprime/MLautomation.git`
   
 
-## Running Tests (Instructions in rake file)
+## Running Tests (instructions in rake file)
 `cd MLautomation`
+
 `rake`
