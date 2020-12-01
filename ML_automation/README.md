@@ -34,12 +34,10 @@
   
 `sudo gem install geckodriver-helper -v 0.0.3`
 
-### 5  Clone MLautomation repo to your local directory
+### 5. Clone MLautomation repo to your local directory
 `git clone https://github.com/Triprime/MLautomation.git`
   
 
-## Running Tests
+## Running Tests (Instructions in rake file)
 `cd MLautomation`
-
-### Instructions
 `rake`
