@@ -18,9 +18,9 @@
 - CMD+space, then type: `terminal`
 
 ### 3. Create local directory for the project and cd to that directory
- `mkdir /Users/<your_user_name>/Projects`
+`mkdir /Users/<your_user_name>/Projects`
 
-  `cd Projects`
+`cd Projects`
 
 ### 4. Install gems
 #### 4.a.  Install selenium-webdriver gem
@@ -33,8 +33,9 @@
 - Source: https://rubygems.org/gems/geckodriver-helper/versions/0.0.3
   
 `sudo gem install geckodriver-helper -v 0.0.3`
-#### 4.d.  Clone MLautomation repo to your local directory
-  `git clone https://github.com/Triprime/MLautomation.git`
+
+### 5  Clone MLautomation repo to your local directory
+`git clone https://github.com/Triprime/MLautomation.git`
   
 
 ## Running Tests
