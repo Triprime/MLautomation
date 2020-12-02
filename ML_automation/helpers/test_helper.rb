@@ -165,7 +165,7 @@ def output_intro(url_group,user_permission,expectation)
 	# puts("\n")
 end
 
-def find_user_for_permission(location,permission)
+def get_user_id(location,permission)
 	user_array = UserData.users
 	user_array.each do |env_group|
 		if env_group[:environment] == location

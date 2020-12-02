@@ -25,7 +25,7 @@ class NavigationTests < Test::Unit::TestCase
 		url_group 		= "project_lead" # array of urls to test for user access
 
 		# based on user permisson, get user info necessary for login and testing
-		@user_id 		= find_user_for_permission(location,permission)
+		@user_id 		= get_user_id(location,permission)
 		@workspace_id 	= get_user_workspace_id(location,@user_id)
 		login_with_user(location,@user_id,permission)
 

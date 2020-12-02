@@ -19,7 +19,7 @@ class NavigationTests < Test::Unit::TestCase
 		location 		= ENV['environment'] 
 		permission 		= ENV['permission']
 		url_groups 		= set_url_groups
-		@user_id 		= find_user_for_permission(location,permission)
+		@user_id 		= get_user_id(location,permission)
 		@workspace_id 	= get_user_workspace_id(location,@user_id)
 
 		login_with_user(location,@user_id,permission)

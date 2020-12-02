@@ -6,14 +6,14 @@ class AGData
 			:group_name		=> "punch_clock",
 			# :default_group 	=> true,
 			# :view_only		=> false,
-			# :participant 	=> "contributor",
+			# :project 			=> "contributor",
+			# :plans			=>	["premier","pro","teams","free"],
 			:included_url_groups => [],
 			:urls 			=>
 			[ 
 				{   
 					:description	=>	"DASHBOARD > Your Dashboard", 
 					:url  			=>	"/users/#{user_id}/dashboard?tab=your-dashboard",
-					:plans			=>	["enterprise","premier","pro","teams","free"],
 					# :locator_type 	=>	:css,
 					# :locator 		=> 	".dashboard-tab"
 				},
@@ -249,7 +249,8 @@ class AGData
 			:urls 			=> []
 		},
 		{ # this is a template for how to set up urls for a specific access group 
-			:group_name		=> "access group name goes here",
+			:group_name		=> "access_group_name_goes_here",
+			:included_url_groups => [],
 			:urls 			=>
 			[
 				{   
