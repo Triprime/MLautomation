@@ -10,7 +10,37 @@ class AGData
 			# :plans			=>	["premier","pro","teams","free"],
 			:included_url_groups => [],
 			:urls 			=>
-			[ 
+			[
+				{   
+					:description	=>	"TOP NAV: User Name Menu > Profile", 
+					:url  			=>	"/profiles/#{user_id}"
+					# :locator_type 	=>	:none,
+					# :locator 		=> 	""
+				},
+				{   
+					:description	=>	"TOP NAV: User Name Menu > Email Settings", 
+					:url  			=>	"/settings/email"
+					# :locator_type 	=>	:none,
+					# :locator 		=> 	""
+				},
+				{   
+					:description	=>	"TOP NAV: User Name Menu > Password & Authorizations", 
+					:url  			=>	"/settings/password"
+					# :locator_type 	=>	:none,
+					# :locator 		=> 	""
+				},
+				{   
+					:description	=>	"TOP NAV: User Name Menu > Google Apps", 
+					:url  			=>	"/settings/google_apps"
+					# :locator_type 	=>	:none,
+					# :locator 		=> 	""
+				},
+				{   
+					:description	=>	"TOP NAV: User Name Menu > Your Exports", 
+					:url  			=>	"/settings/export"
+					# :locator_type 	=>	:none,
+					# :locator 		=> 	""
+				}, 
 				{   
 					:description	=>	"DASHBOARD > Your Dashboard", 
 					:url  			=>	"/users/#{user_id}/dashboard?tab=your-dashboard",
@@ -106,6 +136,10 @@ class AGData
 					:url  			=>	"/stories/upcoming?columnSet=Your+Issues&usingDefaultFilters=true&storyTypes=issue&with_assignees=#{user_id}&byStatus=not+started"
 					# :locator_type 	=>	:xpath,
 					# :locator 		=> 	"//*[text()='Your Issues']"
+				},
+				{   
+					:description	=>	"TASKS > All Tasks v Info", 
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Info&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
 				},	
 				{   
 					:description	=>	"TIME & EXPENSE  > Time Entries (requires membership in a project)", 
@@ -134,36 +168,6 @@ class AGData
 				{   
 					:description	=>	"TIME & EXPENSE  > Expense Reports (requires membership in a project)", 
 					:url  			=>	"/expenses#submissions"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
-				{   
-					:description	=>	"TOP NAV: User Name Menu > Profile", 
-					:url  			=>	"/profiles/#{user_id}"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
-				{   
-					:description	=>	"TOP NAV: User Name Menu > Email Settings", 
-					:url  			=>	"/settings/email"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
-				{   
-					:description	=>	"TOP NAV: User Name Menu > Password & Authorizations", 
-					:url  			=>	"/settings/password"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
-				{   
-					:description	=>	"TOP NAV: User Name Menu > Google Apps", 
-					:url  			=>	"/settings/google_apps"
-					# :locator_type 	=>	:none,
-					# :locator 		=> 	""
-				},
-				{   
-					:description	=>	"TOP NAV: User Name Menu > Your Exports", 
-					:url  			=>	"/settings/export"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				}
@@ -211,6 +215,18 @@ class AGData
 			:urls 			=>
 			[
 				{   
+					:description	=>	"TASKS > All Tasks v Progress", 
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Progress&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan't+repro%2Cresolved%2Cwon't+fix&archived=exclude"
+				},
+				{   
+					:description	=>	"TASKS > All Tasks v Financial", 
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Financial&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
+				},
+				{   
+					:description	=>	"TASKS > All Tasks v Resource", 
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Resource&archived=exclude"
+				},
+				{   
 					:description	=>	"TIME & EXPENSE > Time Approvals | Submitted", 
 					:url  			=>	"/time_entries?tab=time+approvals#personnel/submitted?startDate=#{Time.now.strftime("%Y-%m-%d")}&endDate=#{Time.now.strftime("%Y-%m-%d")}&yourProjects=true"
 				},
@@ -230,7 +246,6 @@ class AGData
 					:description	=>	"BILLING > Invoices | Create across projects by client", 
 					:url  			=>	"/invoices/multi_projects?create=true"
 				}
-
 			]
 		},
 		{ 

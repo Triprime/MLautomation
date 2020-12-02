@@ -40,7 +40,7 @@ def check_for_page_errors(full_url)
 end
 
 def output_summary
-	puts("\nResults:".bold.yellow)
+	puts("\nResults Summary (#{@expected_access_count+@expected_no_access_count} urls tested)".bold.yellow)
 
 	error_count_404 		= set_color_error_count_404
 	# error_count_permission 	= set_color_error_count_permission
@@ -58,8 +58,8 @@ def output_summary
 		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".bold.yellow
 	end
 
-	puts("User does have access     #{access_string}  (actual/expected)")
-	puts("User does not have access #{no_access_string}  (actual/expected)")
+	puts("User does have access (actual/expected):     #{access_string}")
+	puts("User does not have access (actual/expected): #{no_access_string}")
 
 	if(@should_but_didnt.count > 0)
 		puts("URLS that user SHOULD have access to, but was unable to access: #{@should_but_didnt.count.to_s.bold.yellow}")
@@ -282,6 +282,8 @@ def set_url_groups
 		urls_to_test = ["punch_clock","collaborator"]
 	elsif (ENV['urls'] == "pc" || ENV['urls'] == "punch_clock")
 		urls_to_test = ["punch_clock"]
+	else
+		urls_to_test = ENV['urls']
 	end
 
 	return urls_to_test			
