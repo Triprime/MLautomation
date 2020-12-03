@@ -21,6 +21,7 @@ class NavigationTests < Test::Unit::TestCase
 		url_groups 		= set_url_groups
 		@user_id 		= get_user_id(location,permission)
 		@workspace_id 	= get_user_workspace_id(location,@user_id)
+		@template_id	= get_user_template_id(location,@user_id)
 
 		login_with_user(location,@user_id,permission)
 		url_groups.each do |url_group|

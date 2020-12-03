@@ -29,6 +29,13 @@ def check_for_privileges(full_url)
 	end
 end
 
+def check_for_url_match(full_url)
+	unless @selenium.current_url.include? full_url
+		puts("        #{@selenium.current_url}".yellow)
+		puts("    URL mismatch".yellow)
+	end
+end
+
 def check_for_page_errors(full_url)
 	# an error does not automatically cause the test to fail
 	error_exists = false
@@ -40,15 +47,20 @@ def check_for_page_errors(full_url)
 end
 
 def output_summary
-	puts("\nResults Summary (#{@expected_access_count+@expected_no_access_count} urls tested)".bold.yellow)
+	puts("\nResults Summary (#{@expected_access_count+@expected_no_access_count} URLs tested)".bold.yellow)
 
-	error_count_404 		= set_color_error_count_404
+	# error_count_404 		= set_color_error_count_404
 	# error_count_permission 	= set_color_error_count_permission
 
-	puts("404 Errors: #{error_count_404}")
-	@errors_404.each do |url|
-		puts("    #{url}\n")
-	end
+	# puts("404 Errors: #{error_count_404}")
+	# @errors_404.each do |url|
+	# 	puts("    #{url}\n")
+	# end
+
+	# puts("Permission denied: #{error_count_permission}")
+	# @errors_permission.each do |url|
+	# 	puts("    #{url}\n")
+	# end
 
 	if @actual_access_count == @expected_access_count
 		access_string = "#{@actual_access_count}/#{@expected_access_count}".bold.green
@@ -62,23 +74,18 @@ def output_summary
 	puts("User does not have access (actual/expected): #{no_access_string}")
 
 	if(@should_but_didnt.count > 0)
-		puts("URLS that user SHOULD have access to, but was unable to access: #{@should_but_didnt.count.to_s.bold.yellow}")
+		puts("URLs that user SHOULD have access to, but was unable to access: #{@should_but_didnt.count.to_s.bold.yellow}")
 		@should_but_didnt.each do |url|
-			puts("  #{url}\n")
+			puts("    #{url}\n")
 		end
 	end
 
 	if(@shouldnt_but_did.count > 0)
-		puts("URLS that user should NOT have access to, but was able to access: #{@shouldnt_but_did.count.to_s.bold.yellow}")
+		puts("URLs that user should NOT have access to, but was able to access: #{@shouldnt_but_did.count.to_s.bold.yellow}")
 		@shouldnt_but_did.each do |url|
-			puts("  #{url}\n")
+			puts("    #{url}\n")
 		end
 	end
-
-	# puts("Permission denied: #{error_count_permission}")
-	# @errors_permission.each do |url|
-	# 	puts("    #{url}\n")
-	# end
 
 end
 
@@ -120,7 +127,7 @@ def output_url(url,error_exists)
 end
 
 def test_urls_for_permission(group_name,expectation)
-	urls_array = AGData.ag_urls_array(@user_id,@workspace_id)
+	urls_array = AGData.ag_urls_array(@user_id,@workspace_id,@template_id)
 	urls_array.each do |url_group|
 		if url_group[:group_name] == group_name
 			urls = url_group[:urls]
@@ -128,12 +135,13 @@ def test_urls_for_permission(group_name,expectation)
 			i = 1
 			urls.each do |url_data|
 				full_url = build_url(url_data[:url])
-				
 				puts("#{i}  #{url_data[:description]}")
 				get_url(full_url)
 				sleep 0.3
+
 				error_exists = check_for_page_errors(full_url)
 				output_url(full_url,error_exists)
+				check_for_url_match(full_url)
 				update_counts(error_exists,expectation)
 				update_arrays(full_url,error_exists,expectation)
 
@@ -193,6 +201,23 @@ def get_user_workspace_id(location,id)
 					break
 				# else
 				# 	puts("No workspace_id found for user_id: #{id} and environment: #{location}")    
+				end
+			end
+		end
+	end
+end
+
+def get_user_template_id(location,id)
+	user_array = UserData.users
+	user_array.each do |env_group|
+		if env_group[:environment] == location
+			users = env_group[:users]
+			users.each do |user|
+				if user[:user_id] == id
+					return user[:template_id]
+					break
+				# else
+				# 	puts("No template_id found for user_id: #{id} and environment: #{location}")    
 				end
 			end
 		end

@@ -1,6 +1,6 @@
 class AGData
 
-	def self.ag_urls_array(user_id=0, workspace_id=0)
+	def self.ag_urls_array(user_id=0, workspace_id=0, template_id=0)
 	[
 		{
 			:group_name		=> "punch_clock",
@@ -12,31 +12,31 @@ class AGData
 			:urls 			=>
 			[
 				{   
-					:description	=>	"TOP NAV: User Name Menu > Profile", 
+					:description	=>	"TOP NAV: User Name Menu v Profile", 
 					:url  			=>	"/profiles/#{user_id}"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				},
 				{   
-					:description	=>	"TOP NAV: User Name Menu > Email Settings", 
+					:description	=>	"TOP NAV: User Name Menu v Email Settings", 
 					:url  			=>	"/settings/email"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				},
 				{   
-					:description	=>	"TOP NAV: User Name Menu > Password & Authorizations", 
+					:description	=>	"TOP NAV: User Name Menu v Password & Authorizations", 
 					:url  			=>	"/settings/password"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				},
 				{   
-					:description	=>	"TOP NAV: User Name Menu > Google Apps", 
+					:description	=>	"TOP NAV: User Name Menu v Google Apps", 
 					:url  			=>	"/settings/google_apps"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
 				},
 				{   
-					:description	=>	"TOP NAV: User Name Menu > Your Exports", 
+					:description	=>	"TOP NAV: User Name Menu v Your Exports", 
 					:url  			=>	"/settings/export"
 					# :locator_type 	=>	:none,
 					# :locator 		=> 	""
@@ -139,7 +139,8 @@ class AGData
 				},
 				{   
 					:description	=>	"TASKS > All Tasks v Info", 
-					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Info&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
+					# :url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Info&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Info"
 				},	
 				{   
 					:description	=>	"TIME & EXPENSE  > Time Entries (requires membership in a project)", 
@@ -206,6 +207,10 @@ class AGData
 				{   
 					:description	=>	"TEMPLATES > All Templates > New Template", 
 					:url  			=>	"/project_templates#new"
+				},
+				{   
+					:description	=>	"TEMPLATES > All Templates > Edit Template", 
+					:url  			=>	"/project_templates#edit/#{template_id}"
 				}
 			]
 		},
@@ -215,16 +220,19 @@ class AGData
 			:urls 			=>
 			[
 				{   
-					:description	=>	"TASKS > All Tasks v Progress", 
-					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Progress&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan't+repro%2Cresolved%2Cwon't+fix&archived=exclude"
+					:description	=>	"TASKS > All Tasks v View: Progress", 
+					# :url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Progress&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan't+repro%2Cresolved%2Cwon't+fix&archived=exclude"
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Progress"
 				},
 				{   
-					:description	=>	"TASKS > All Tasks v Financial", 
-					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Financial&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
+					:description	=>	"TASKS > All Tasks v View: Financial", 
+					# :url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Financial&byStatus=not+started%2Cstarted%2Cneeds+info%2Cnew%2Creopened%2Cin+progress%2Cblocked%2Cfixed%2Cduplicate%2Ccan%27t+repro%2Cresolved%2Cwon%27t+fix&archived=exclude"
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Financial"
 				},
 				{   
-					:description	=>	"TASKS > All Tasks v Resource", 
-					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Resource&archived=exclude"
+					:description	=>	"TASKS > All Tasks v View: Resource", 
+					# :url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Resource&archived=exclude"
+					:url  			=>	"/stories/upcoming?usingDefaultFilters=true&columnSet=Resource"
 				},
 				{   
 					:description	=>	"TIME & EXPENSE > Time Approvals | Submitted", 
@@ -251,7 +259,45 @@ class AGData
 		{ 
 			:group_name		=> "report_viewer",
 			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead"],
-			:urls 			=> []
+			:urls 			=> 
+			[
+				{   
+					:description	=>	"PROJECTS > All Projects > Project | Resource Planner", 
+					:url  			=>	"/workspaces/#{workspace_id}/resourcing"
+				},
+				{   
+					:description	=>	"ANALYTICS > Invoices", 
+					:url  			=>	"/reports#invoices"
+				},
+				{   
+					:description	=>	"ANALYTICS > Expenses", 
+					:url  			=>	"/reports#expenses"
+				},
+				{   
+					:description	=>	"ANALYTICS > Accounts Receivable", 
+					:url  			=>	"/reports#accounts-receivable"
+				},
+				{   
+					:description	=>	"ANALYTICS > WIP", 
+					:url  			=>	"/reports#wip"
+				},
+				{   
+					:description	=>	"ANALYTICS > Project Details", 
+					:url  			=>	"/reports#project-details"
+				},
+				{   
+					:description	=>	"ANALYTICS > Utilization", 
+					:url  			=>	"/reports#utilization"
+				},
+				{   
+					:description	=>	"ANALYTICS > Time Tracking", 
+					:url  			=>	"/reports#time-tracking"
+				},
+				{   
+					:description	=>	"ANALYTICS > Time Approvals", 
+					:url  			=>	"/reports#time-approvals"
+				}
+			]
 		},
 		{ 
 			:group_name		=> "report_viewer_with_cost",
