@@ -9,7 +9,8 @@ class EnvironmentData
 		# then added to user_data.rb
 		{
 			"production" 	=> "https://app.mavenlink.com",
-			"mwho" 			=> "https://app.mwho.mvn.link"
+			"mwho" 			=> "https://app.mwho.mvn.link",
+			"railsnext"		=> "https://app.railsnext.mvn.link"
 		}[self.get_environment]
 
 
