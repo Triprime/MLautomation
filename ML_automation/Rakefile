@@ -85,9 +85,10 @@ end
 task :url_tests do
 	ARGV.each { |a| task a.to_sym do ; end }
 
-	# 1st arg = environment to test on (mwho, prod, etc)
-	# 2nd arg = user permission/access_group to test with (punch_clock, collaborator, etc)
-	# 3rd arg = url groups to test against (all_defaults, rvc, rv, prl, prc, co, pc)
+	# arg 0 = rake command to run (url_tests)
+	# arg 1 = environment to test on (mwho, prod, etc)
+	# arg 2 = user permission/access_group to test with (punch_clock, collaborator, etc)
+	# arg 3 = url groups to test against (all_defaults, rvc, rv, prl, prc, co, pc)
 
 	ENV['environment']=ARGV[1].to_s
 	ENV['permission']=ARGV[2].to_s
@@ -95,3 +96,21 @@ task :url_tests do
 
 	ruby "tests/url_tests.rb"
 end
+
+task :all_defaults_groups do
+	ARGV.each { |a| task a.to_sym do ; end }
+
+	# arg 0 = rake command to run (all_default_groups)
+	# arg 1 = environment to test on (mwho, prod, etc)
+
+	ENV['environment']=ARGV[1].to_s
+	ENV['urls']="all_defaults"
+
+	ags = ["admin", "report_viewer_with_cost", "report_viewer", "project_lead", "project_creator", "collaborator", "punch_clock"]
+	
+	ags.each do |ag|
+		ENV['permission']=ag
+		ruby "tests/url_tests.rb"
+	end
+end
+

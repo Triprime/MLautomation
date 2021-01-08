@@ -8,7 +8,7 @@ class EnvironmentData
 		# before running tests on an environment, an account and members must be manually created,
 		# then added to user_data.rb
 		{
-			"production" 	=> "https://app.mavenlink.com",
+			"production" 	=> "https://app.mavenlink.com", # Currently, no account set up on production
 			"mwho" 			=> "https://app.mwho.mvn.link",
 			"railsnext"		=> "https://app.railsnext.mvn.link"
 		}[self.get_environment]
