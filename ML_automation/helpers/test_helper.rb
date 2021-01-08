@@ -46,6 +46,13 @@ def check_for_page_errors(full_url)
 	return error_exists
 end
 
+# def close_popup
+# 	if @selenium.find_elements(:xpath, "//*[contains(text(),'Leave Page')]").size > 0
+# 		puts("\nClosing popup".yellow)
+# 		click(:xpath, "//*[contains(text(),'Leave Page')]")
+# 	end
+# end
+
 def output_summary
 	puts("\nResults Summary (#{@expected_access_count+@expected_no_access_count} URLs tested)".bold.yellow)
 
@@ -70,18 +77,18 @@ def output_summary
 		no_access_string = "#{@actual_no_access_count}/#{@expected_no_access_count}".bold.yellow
 	end
 
-	puts("User does have access (actual/expected):     #{access_string}")
-	puts("User does not have access (actual/expected): #{no_access_string}")
+	puts("User has access (actual/expected):    #{access_string}")
+	puts("User has NO access (actual/expected): #{no_access_string}")
 
 	if(@should_but_didnt.count > 0)
-		puts("URLs that user SHOULD have access to, but was unable to access: #{@should_but_didnt.count.to_s.bold.yellow}")
+		puts("URLs that user was NOT able to access, but SHOULD have access: #{@should_but_didnt.count.to_s.bold.yellow}")
 		@should_but_didnt.each do |url|
 			puts("    #{url}\n")
 		end
 	end
 
 	if(@shouldnt_but_did.count > 0)
-		puts("URLs that user should NOT have access to, but was able to access: #{@shouldnt_but_did.count.to_s.bold.yellow}")
+		puts("URLs that user was able to access, but should NOT have access: #{@shouldnt_but_did.count.to_s.bold.yellow}")
 		@shouldnt_but_did.each do |url|
 			puts("    #{url}\n")
 		end
@@ -137,7 +144,8 @@ def test_urls_for_permission(group_name,expectation)
 				full_url = build_url(url_data[:url])
 				puts("#{i}  #{url_data[:description]}")
 				get_url(full_url)
-				sleep 0.3
+				# close_popup
+				sleep 0.4
 
 				error_exists = check_for_page_errors(full_url)
 				output_url(full_url,error_exists)

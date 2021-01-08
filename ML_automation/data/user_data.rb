@@ -10,8 +10,10 @@ class UserData
 					:email 			=> "mavenlinkqa+automation@gmail.com",
 					:password 		=> "password",
 					:permission 	=> "admin",
-					:workspace_id 	=> 69665
-					
+					:workspace_id 	=> 69665,
+					:template_id	=> 823385,
+					:exchange_table_id => 145,
+					:rate_card_id 	=> 4095		
 				},
 				{
 					:user_id 		=> 41555,
@@ -19,7 +21,6 @@ class UserData
 					:password 		=> "password",
 					:permission 	=> "punch_clock",
 					:workspace_id 	=> 69665
-						
 				},
 				{
 					:user_id 		=> 41585,
@@ -60,6 +61,68 @@ class UserData
 					:permission 	=> "report_viewer_with_cost",
 					:workspace_id 	=> 69665,
 					:template_id	=> 823375	
+				}
+			]
+		},
+		{
+			:environment 	=> "railsnext",
+			:users			=> [
+				{
+					:user_id 		=> 19975,
+					:email 			=> "mavenlinkqa+automation@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "admin",
+					:workspace_id 	=> 325,
+					:template_id	=> 45,
+					# :exchange_table_id => 145,
+					:rate_card_id 	=> 5	
+				},
+				{
+					:user_id 		=> 20035,
+					:email 			=> "mavenlinkqa+auto.pc@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "punch_clock",
+					:workspace_id 	=> 325
+				},
+				{
+					:user_id 		=> 20025,
+					:email 			=> "mavenlinkqa+auto.co@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "collaborator",
+					:workspace_id 	=> 325
+						
+				},
+				{
+					:user_id 		=> 20015,
+					:email 			=> "mavenlinkqa+auto.prc@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "project_creator",
+					:workspace_id 	=> 325,
+					:template_id	=> 85	
+				},
+				{
+					:user_id 		=> 20005,
+					:email 			=> "mavenlinkqa+auto.prl@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "project_lead",
+					:workspace_id 	=> 325,
+					:template_id	=> 75	
+				},
+				{
+					:user_id 		=> 19995,
+					:email 			=> "mavenlinkqa+auto.rv@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "report_viewer",
+					:workspace_id 	=> 325,
+					:template_id	=> 65	
+				},
+				{
+					:user_id 		=> 19985,
+					:email 			=> "mavenlinkqa+auto.rvc@gmail.com",
+					:password 		=> "password",
+					:permission 	=> "report_viewer_with_cost",
+					:workspace_id 	=> 325,
+					:template_id	=> 55	
 				}
 			]
 		},

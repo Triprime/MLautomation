@@ -60,8 +60,20 @@ class AGData
 					# :locator 		=> 	"files_wrapper"
 				},
 				{   
-					:description	=>	"PROJECTS > All Projects | List (default view)", 
+					:description	=>	"PROJECTS > All Projects | Index v Show: Your Projects (default view)", 
 					:url  			=>	"/projects#?genreFilter=has_participation"
+					# :locator_type 	=>	:css,
+					# :locator 		=> 	".workspace-list-wrapper"
+				},
+				{   
+					:description	=>	"PROJECTS > All Projects | Index v Show: Joinable Projects", 
+					:url  			=>	"/projects#?genreFilter=only_joinable"
+					# :locator_type 	=>	:css,
+					# :locator 		=> 	".workspace-list-wrapper"
+				},
+				{   
+					:description	=>	"PROJECTS > All Projects | Index v Show: Guest Projects", 
+					:url  			=>	"/projects#?genreFilter=viewable_as_guest"
 					# :locator_type 	=>	:css,
 					# :locator 		=> 	".workspace-list-wrapper"
 				},
@@ -262,6 +274,10 @@ class AGData
 			:urls 			=> 
 			[
 				{   
+					:description	=>	"PROJECTS > All Projects | Index v Show: Account Projects", 
+					:url  			=>	"/projects#?genreFilter=on_account_by_orgs"
+				},
+				{   
 					:description	=>	"PROJECTS > All Projects > Project | Resource Planner", 
 					:url  			=>	"/workspaces/#{workspace_id}/resourcing"
 				},
@@ -302,12 +318,104 @@ class AGData
 		{ 
 			:group_name		=> "report_viewer_with_cost",
 			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead","report_viewer"],
-			:urls 			=> []
+			:urls 			=> 
+			[
+				{   
+					:description	=>	"ANALYTICS > Margin", 
+					:url  			=>	"/reports#margin"
+				},
+			]
 		},
 		{ 
 			:group_name		=> "admin",
 			:included_url_groups => ["punch_clock","collaborator","project_creator","project_lead","report_viewer","report_viewer_with_cost"],
-			:urls 			=> []
+			:urls 			=> 
+			[
+				{   
+					:description	=>	"SETTINGS > General", 
+					:url  			=>	"/settings/account/general"
+				},
+				{   
+					:description	=>	"SETTINGS > Time & Expense", 
+					:url  			=>	"/settings/account/time_and_expense"
+				},
+				{   
+					:description	=>	"SETTINGS > Resource Management", 
+					:url  			=>	"/settings/account/resource_management"
+				},
+				{   
+					:description	=>	"SETTINGS > Invoices", 
+					:url  			=>	"/settings/account/invoice" # "Leave" popup
+				},
+				{   
+					:description	=>	"SETTINGS > Foreign Exchange", 
+					:url  			=>	"/settings/account/exchange_table/145" # exchange_table_id ?
+				},
+				{   
+					:description	=>	"SETTINGS > Project Accounting", 
+					:url  			=>	"/settings/account/project_accounting"
+				},
+				{   
+					:description	=>	"SETTINGS > QuickBooks", 
+					:url  			=>	"/settings/account/quickbooks"
+				},
+				{   
+					:description	=>	"SETTINGS > Security", 
+					:url  			=>	"/settings/account/security"
+				},
+				{   
+					:description	=>	"SETTINGS > API", 
+					:url  			=>	"/settings/api"
+				},
+				{   
+					:description	=>	"SETTINGS > Custom Branding", 
+					:url  			=>	"/private_label"
+				},
+				{   
+					:description	=>	"SETTINGS > Custom Fields", 
+					:url  			=>	"/settings/account/custom_fields"
+				},
+				{   
+					:description	=>	"SETTINGS > Members", 
+					:url  			=>	"/settings/account/members#active"
+				},
+				{   
+					:description	=>	"SETTINGS > Members +", 
+					:url  			=>	"/settings/account/members?showInvitation=true#active" # "Leave" popup
+				},
+				{   
+					:description	=>	"SETTINGS > Access Groups", 
+					:url  			=>	"/settings/account/access_groups"
+				},
+				{   
+					:description	=>	"SETTINGS > Project Permissions Defaults", 
+					:url  			=>	"/settings/permissions_map"
+				},
+				{   
+					:description	=>	"SETTINGS > Rate Cards", 
+					:url  			=>	"/settings/account/rate_card/4095/edit" # rate_card_id ?
+				},
+				{   
+					:description	=>	"SETTINGS > Roles", 
+					:url  			=>	"/settings/roles"
+				},
+				{   
+					:description	=>	"SETTINGS > Schedule", 
+					:url  			=>	"/settings/schedule#workweeks"
+				},
+				{   
+					:description	=>	"SETTINGS > Skills", 
+					:url  			=>	"/settings/skills"
+				},
+				{   
+					:description	=>	"SETTINGS > Plan", 
+					:url  			=>	"/settings/account/subscription"
+				},
+				{   
+					:description	=>	"SETTINGS > Billing", 
+					:url  			=>	"/settings/account/subscription/billing"
+				}
+			]
 		},
 		{ # this is a template for how to set up urls for a specific access group 
 			:group_name		=> "access_group_name_goes_here",
