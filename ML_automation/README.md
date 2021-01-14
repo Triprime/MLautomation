@@ -8,11 +8,11 @@
 #### 2.b. Create a new Project and invite each of the new users to that project 
 #### 2.c. Write down the project ID
 ### 3. Using Mailcatcher, accept the account invitation for each user
-#### 3.a. Set the password for each user, using predefined user data 
+#### 3.a. Using predefined user data, set the password for each user  
 #### 3.b. Login as each user
 ### 4. While logged in as each user, do the following: 
 #### 4.a. For users that have permission, create a Project Template for that specific user
-#### 4.b. When creating each new Template, add a Task to that template, for the related user
+#### 4.b. When creating each new Template, add a Task to that template, assigned to the related user
 #### 4.c. Write down the template ID
 
 
@@ -40,7 +40,7 @@
 - Only required for MacOS 10.15 
 - This is a work around for a known issue with MacOS 10.15 and geckodriver
 - Source: https://rubygems.org/gems/geckodriver-helper/versions/0.0.3
-`sudo gem install geckodriver-helper -v 0.0.3`
+- `sudo gem install geckodriver-helper -v 0.0.3`
 
 ### 4. Clone MLautomation repo to your local directory
 `git clone https://github.com/Triprime/MLautomation.git`
