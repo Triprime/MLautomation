@@ -36,10 +36,9 @@ To run the tests locally, perform the following steps.
 - Firefox: https://www.mozilla.org/en-US/firefox/mac/
 
 ### 2. Create local directory for the project and cd to that directory
-- Terminal (installed on Macs by default)
-- CMD+space, then type: `terminal`
-- example: `mkdir /Users/<your_user_name>/Projects`
-- `cd Projects`
+- Open Terminal with CMD+space, then type: `terminal`
+- Create a new directory for the automation repo. Example: `mkdir /Users/<your_user_name>/Projects`
+- Navigate into the new directory: `cd Projects`
 
 ### 3. Install gems
 #### 3.a.  Install selenium-webdriver gem
