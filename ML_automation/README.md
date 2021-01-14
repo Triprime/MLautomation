@@ -2,11 +2,11 @@
 To run the tests locally, perform the following steps.
 
 ## Staging Setup
-### 1. On the Mavenlink staging environment, create a new account and upgrade it to Premier
+### 1. On the Mavenlink team staging environment, create a new account and upgrade it to Premier
 #### 1.a. If staging env is not up to date with production, the automation may not function correctly
 #### 1.b. Use predefined user data to create the Admin account
-#### 1.c. Write down the account ID
-#### 1.d. Upgrade the account to Premier
+#### 1.c. Upgrade the account to Premier
+#### 1.d. Write down the account ID
 #### 1.e. Enable the following feature flags on the account:
 - Edit Profile in Access Groups
 - Account Admins get all access group permissions (if the FF has not been removed)
@@ -14,7 +14,7 @@ To run the tests locally, perform the following steps.
 - Project Accounting Object
 
 ### 2. Using the Account Owner and predefined user data, do the following: 
-#### 2.a. Invite new users for each of the default permission levels
+#### 2.a. Invite 1 new user for each of the default permission levels
 #### 2.b. Create a new Project and invite each of the new users to that project 
 #### 2.c. Write down the project ID
 ### 3. Using Mailcatcher, accept the account invitation for each user
