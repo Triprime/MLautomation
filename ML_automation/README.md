@@ -2,11 +2,12 @@
 To run the tests locally, perform the following steps.
 
 ## Staging Setup
-### 1. On the Mavenlink staging environment, create a new account and upgrade it to Premium
-#### 1.a. Use predefined user data to create the Admin account
-#### 1.b. If staging env is not up to date with production, the automation may not function correctly
+### 1. On the Mavenlink staging environment, create a new account and upgrade it to Premier
+#### 1.a. If staging env is not up to date with production, the automation may not function correctly
+#### 1.b. Use predefined user data to create the Admin account
 #### 1.c. Write down the account ID
-#### 1.d. Enable the following feature flags on the account:
+#### 1.d. Upgrade the account to Premier
+#### 1.e. Enable the following feature flags on the account:
 - Edit Profile in Access Groups
 - Account Admins get all access group permissions (if the FF has not been removed)
 - Access Control Default Access Groups
