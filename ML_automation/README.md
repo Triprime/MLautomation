@@ -2,7 +2,15 @@
 
 ## Staging Setup (required to run the tests locally)
 ### 1. On the Mavenlink staging environment, create a new account and upgrade it to Premium
-#### NOTE:  Use predefined user data to create the Admin account
+#### 1.a. Use predefined user data to create the Admin account
+#### 1.b. If staging env is not up to date with production, the automation may not function correctly
+#### 1.c. Write down the account ID
+#### 1.d. Enable the following feature flags on the account:
+- Edit Profile in Access Groups
+- Account Admins get all access group permissions (if the FF has not been removed)
+- Access Control Default Access Groups
+- Project Accounting Object
+
 ### 2. Using the Account Owner and predefined user data, do the following: 
 #### 2.a. Invite new users for each of the default permission levels
 #### 2.b. Create a new Project and invite each of the new users to that project 
