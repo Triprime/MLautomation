@@ -47,6 +47,6 @@
   
 
 ## Running Tests (instructions in rake file)
-`cd ML_automation`
-`rake help`
-`rake instructions`
+- `cd ML_automation`
+- `rake help`
+- `rake instructions`
