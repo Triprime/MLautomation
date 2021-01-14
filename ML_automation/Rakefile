@@ -17,8 +17,17 @@ task :help do
 
 	Functional tests check to see if a user can do a certain thing that should be allowed
 	by their granted permission(s). [These tests are not yet ready for use.]
+	
+
+	To see additional information about running URL Access tests, type: rake url_instructions
 
 
+	Before running any tests, ensure your local files are up to date with 'git pull'.
+	\n"
+end
+
+task :url_instructions do
+	puts"
 	To run a URL Access test, use the following convention to type a command in your terminal interface:
 	rake url_tests <environment> <user_permission> <url_groups_to_test>
 	
@@ -38,13 +47,8 @@ task :help do
 	and only the 'url_tests' test is built to be used by rake. 
 	Not all urls have been included in each access_group at this point.
 	No Functional tests exist yet.
-	
-	To see additional information about running tests, type: rake instructions
-	\n"
-end
 
-task :instructions do
-	puts"
+
 	For the command:
 	rake url_tests <environment> <user_permission> <url_groups_to_test>
 	
