@@ -97,7 +97,7 @@ task :url_tests do
 	ruby "tests/url_tests.rb"
 end
 
-task :all_defaults_groups do
+task :all_default_groups do
 	ARGV.each { |a| task a.to_sym do ; end }
 
 	# arg 0 = rake command to run (all_default_groups)

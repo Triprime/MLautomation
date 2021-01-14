@@ -8,9 +8,11 @@ class EnvironmentData
 		# before running tests on an environment, an account and members must be manually created,
 		# then added to user_data.rb
 		{
-			"production" 	=> "https://app.mavenlink.com", # Currently, no account set up on production
+			"production" 	=> "https://app.mavenlink.com", 		# Currently, no automated QA account set up
 			"mwho" 			=> "https://app.mwho.mvn.link",
-			"railsnext"		=> "https://app.railsnext.mvn.link"
+			"railsnext"		=> "https://app.railsnext.mvn.link",
+			"webinf"		=> "https://app.webinf.mvn.link",		# Currently, no automated QA account set up
+			"quickbooks"	=> "https://app.quickbooks.mvn.link"	# Currently, no automated QA account set up
 		}[self.get_environment]
 
 

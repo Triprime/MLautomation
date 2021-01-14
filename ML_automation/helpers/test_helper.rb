@@ -54,7 +54,8 @@ end
 # end
 
 def output_summary
-	puts("\nResults Summary (#{@expected_access_count+@expected_no_access_count} URLs tested)".bold.yellow)
+	puts "-"*50
+	puts("\nResults Summary for #{ENV['permission'].bold.yellow} user. (#{@expected_access_count+@expected_no_access_count} URLs tested)")
 
 	# error_count_404 		= set_color_error_count_404
 	# error_count_permission 	= set_color_error_count_permission
