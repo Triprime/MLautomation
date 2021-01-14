@@ -1,6 +1,7 @@
 # MavenLink Permissions Automation
+To run the tests locally, perform the following steps.
 
-## Staging Setup (required to run the tests locally)
+## Staging Setup
 ### 1. On the Mavenlink staging environment, create a new account and upgrade it to Premium
 #### 1.a. Use predefined user data to create the Admin account
 #### 1.b. If staging env is not up to date with production, the automation may not function correctly
@@ -29,7 +30,7 @@
 #### 2. In user_data.rb, add the predefined user data, and the recorded IDs for project and templates
 
 
-## Local Setup (required to run the tests locally)
+## Local Setup
 ### 1. Install Firefox browser for Mac
 - Firefox: https://www.mozilla.org/en-US/firefox/mac/
 
