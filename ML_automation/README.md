@@ -24,9 +24,9 @@
 #### 4.c. Write down the template ID
 
 
-## Update env_data.rb and user_data.rb in the repo
-### 1. In env_data.rb, add the base url for the staging environment
-### 2. In user_data.rb, add the predefined user data, and the recorded IDs for project and templates
+## Update repo
+#### 1. In env_data.rb, add the base url for the staging environment
+#### 2. In user_data.rb, add the predefined user data, and the recorded IDs for project and templates
 
 
 ## Local Setup (required to run the tests locally)
