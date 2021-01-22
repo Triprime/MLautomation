@@ -12,7 +12,12 @@ class EnvironmentData
 			"mwho" 			=> "https://app.mwho.mvn.link",
 			"railsnext"		=> "https://app.railsnext.mvn.link",
 			"webinf"		=> "https://app.webinf.mvn.link",		# Currently, no automated QA account set up
-			"quickbooks"	=> "https://app.quickbooks.mvn.link"	# Currently, no automated QA account set up
+			"quickbooks"	=> "https://app.quickbooks.mvn.link",	# Currently, no automated QA account set up
+			"snow"			=> "https://app.snowpeople.mvn.link",	# Currently, no automated QA account set up
+			"staging1"		=> "https://app.staging1.mavenlink.net",
+			"rogue"			=> "https://app.roguesquadron.mvn.link",
+			"msync"			=> "https://app.msync.mvn.link",
+			"rpm"			=> "https://app.rpm.mvn.link"
 		}[self.get_environment]
 
 

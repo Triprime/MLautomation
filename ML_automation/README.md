@@ -58,4 +58,3 @@ To run the tests locally, perform the following steps.
 ## Running Tests (instructions in rake file)
 - `cd ML_automation`
 - `rake help`
-- `rake instructions`

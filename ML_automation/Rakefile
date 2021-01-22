@@ -19,10 +19,10 @@ task :help do
 	by their granted permission(s). [These tests are not yet ready for use.]
 	
 
+	Before running any tests, ensure your local files are up to date with: git pull
+
+
 	To see additional information about running URL Access tests, type: rake url_instructions
-
-
-	Before running any tests, ensure your local files are up to date with 'git pull'.
 	\n"
 end
 
@@ -49,12 +49,13 @@ task :url_instructions do
 	No Functional tests exist yet.
 
 
-	For the command:
+	Command:
 	rake url_tests <environment> <user_permission> <url_groups_to_test>
 	
 	Available arguments:
 	<environment>
 		mwho
+		railsnext
 
 	<user_permission>
 		admin
