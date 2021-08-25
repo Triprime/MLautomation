@@ -14,10 +14,21 @@ def login_with_user(location,id,user_permission)
 	click(:id, "login_password")
 	clear(:id, "login_password")
 	send_keys(:id, "login_password", password)
+	send_keys(:id, "login_password", :return)
 	# click(:css, ".form_login__3K3lx") # seems to be deprecated as of 11/9/20
 	# click(:css, ".form_form__login--3K3lx")
-	click(:xpath, "//button[contains(.,'Login')]")
+	# click(:xpath, "//button[contains(.,'Log In')]")
+	sleep 1.0
+	proceed_if_dashboard(id)
 	close_modal()
+end
+
+def proceed_if_dashboard(id)
+	if @selenium.current_url == "https://app.mwho.mvn.link/users/#{id}/dashboard"
+		puts("#{@selenium.current_url}".green)
+	else
+		puts("#{@selenium.current_url}".red)
+	end
 end
 
 def close_modal
@@ -35,8 +46,10 @@ def logout
 	get_url(dashboard_url)
 	sleep 0.4
 
-	click(:css, ".user-settings-menu-toggle-name")
-	click(:link_text, "Sign Out")
+	# click(:css, ".user-settings-menu-toggle-name")
+	click(:id, "user-settings-menu-toggle")
+	# click(:link_text, "Sign Out")
+	click(:xpath, "//li[contains(.,'Sign Out')]")
 end
 
 def get_users_for_environment(location)

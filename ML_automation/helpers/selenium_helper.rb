@@ -4,6 +4,7 @@ end
 
 def click(type=:css, element)
 	find_element(type, element).click
+	# puts("Clicked: #{type} #{element}")
 end
 
 def clear(type=:css, element)

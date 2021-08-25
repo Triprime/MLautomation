@@ -7,7 +7,7 @@ require_relative '../helpers/require_helper'
 class NavigationTests < Test::Unit::TestCase
 
 	def setup
-		@selenium = Selenium::WebDriver.for(:firefox)
+		@selenium = Selenium::WebDriver.for :firefox
 	end
 
 	def teardown

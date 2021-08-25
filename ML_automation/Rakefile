@@ -102,6 +102,49 @@ task :url_tests do
 	ruby "tests/url_tests.rb"
 end
 
+task :permissions do
+	ARGV.each { |a| task a.to_sym do ; end }
+	# arg 0 = rake command to run (url_tests)
+
+	def get_parameters
+		# get available envs
+		STDOUT.puts "Enter environment to run tests on: (mwho, etc.): "
+		ENV['environment']=STDIN.gets.strip.downcase
+		# validate input
+
+		# get available user permission levels for the env
+		STDOUT.puts "Enter the permission level of the USER for this test: "
+		ENV['permission']=STDIN.gets.strip.downcase
+		# validate input
+		
+		# get available url permission levels for the env
+		STDOUT.puts "Enter the permission level of the URLS for this test (all_defaults will be used if nothing is entered): "
+		ENV['urls']=STDIN.gets.strip.downcase
+		# validate input
+		if ENV['urls'] ==  "" || ENV['urls'] == nil
+			ENV['urls'] = "all_defaults"
+		end
+	end
+
+	get_parameters
+	# verify before starting test run
+	STDOUT.puts ENV['environment']
+	STDOUT.puts ENV['permission']
+	STDOUT.puts ENV['urls']
+	STDOUT.puts "Continue Y/N?"
+	continue = STDIN.gets.strip.downcase
+	if continue == "y"
+		# ruby "tests/url_tests.rb"
+		STDOUT.puts "running test..."
+	else
+		STDOUT.puts "Select \n'1' to Quit \n'2' to input new test parameters"
+		quit = STDIN.gets.strip.downcase
+		if quit == '2'
+			get_parameters
+		end
+	end
+end
+
 task :all_default_groups do
 	ARGV.each { |a| task a.to_sym do ; end }
 
